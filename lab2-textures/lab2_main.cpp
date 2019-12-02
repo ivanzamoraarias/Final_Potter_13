@@ -21,7 +21,7 @@ using namespace glm;
 int mag = 1;
 int mini = 5;
 float anisotropy = 16.0f;
-float camera_pan = 0.f;
+float camera_pan = 0.0f;
 bool showUI = false;
 
 // The shaderProgram holds the vertexShader and fragmentShader
@@ -29,9 +29,12 @@ GLuint shaderProgram;
 
 // The vertexArrayObject here will hold the pointers to
 // the vertex data (in positionBuffer) and color data per vertex (in colorBuffer)
-GLuint positionBuffer, colorBuffer, indexBuffer, vertexArrayObject;
+GLuint positionBuffer, colorBuffer, indexBuffer, textcoordBuffer, vertexArrayObject;
+GLuint texture;
 
-
+// Explosion variables
+GLuint positionBufferExp, indexBufferExp, textcoordBufferExp, vertexArrayObjectExp;
+GLuint textureExp;
 
 void initGL()
 {
@@ -51,7 +54,7 @@ void initGL()
 		-10.0f, -5.0f,  -10.0f,  // v0
 		-10.0f, 100.0f, -330.0f, // v1
 		10.0f,  100.0f, -330.0f, // v2
-		10.0f,  -5.0f,  -10.0f   // v3
+		10.0f,  -5.0f,  -10.0f,   // v3
 	};
 	// Create a handle for the vertex position buffer
 	glGenBuffers(1, &positionBuffer);
@@ -70,6 +73,32 @@ void initGL()
 	//				 Enable the vertex attrib array.
 	///////////////////////////////////////////////////////////////////////////
 
+	/*
+	float texcoords[] = {
+		0.0f, 0.0f, // (u,v) for v0 
+		0.0f, 1.0f, // (u,v) for v1
+		1.0f, 1.0f, // (u,v) for v2
+		1.0f, 0.0f // (u,v) for v3
+	};
+	*/
+
+	float texcoords[] = {
+		0.0f, 0.0f,    // (u,v) for v0
+		0.0f, 15.0f,   // (u,v) for v1
+		1.0f, 15.0f,   // (u,v) for v2
+		1.0f, 0.0f     // (u,v) for v3
+	};
+
+	// Create handle
+	glGenBuffers(1, &textcoordBuffer);
+	//Bind buffer
+	glBindBuffer(GL_ARRAY_BUFFER, textcoordBuffer);
+	//Put data in buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(texcoords), texcoords, GL_STATIC_DRAW);
+	// Add data as VAO attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
+	// Enable attribute
+	glEnableVertexAttribArray(2);
 	///////////////////////////////////////////////////////////////////////////
 	// Create the element array buffer object
 	///////////////////////////////////////////////////////////////////////////
@@ -93,6 +122,130 @@ void initGL()
 	//			Load Texture
 	//************************************
 	// >>> @task 2
+	// >>> @task 2.1
+	int w, h, comp;
+	unsigned char* image = stbi_load("../scenes/asphalt.jpg", &w, &h, &comp, STBI_rgb_alpha);
+
+	// Create texture handle
+	glGenTextures(1, &texture);
+	// Bind texture
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// Upload data to buffer
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	// image no longer needed, free memory
+	free(image);
+
+	// Sampling
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	//Filtering
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	// Sets the type of filtering to be used on magnifying and
+	// minifying the active texture. These are the nicest available options.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16.0f);
+
+
+
+	///////////////////////////////////////////////////////
+	//
+	//	Task 6
+	//
+	///////////////////////////////////////////////////////
+
+	/* Create VAO */
+
+	// Create a handle for the vertex array object
+	glGenVertexArrays(1, &vertexArrayObjectExp);
+	// Set it as current, i.e., related calls will affect this object
+	glBindVertexArray(vertexArrayObjectExp);
+
+
+	/* Positions Buffer Object */
+
+	const float positionsExp[] = {
+		// X      Y			
+		-10.0f,	0.0f,	-40.0f,  // v0
+		-10.0f,	20.0f,	-40.0f, // v1
+		10.0f,	20.0f,	-40.0f, // v2
+		10.0f,	0.0f,	-40.0f   // v3
+	};
+
+	// Create a handle for the vertex position buffer
+	glGenBuffers(1, &positionBufferExp);
+	// Set the newly created buffer as the current one
+	glBindBuffer(GL_ARRAY_BUFFER, positionBufferExp);
+	// Send the vetex position data to the current buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(positionsExp), positionsExp, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
+	// Enable the attribute
+	glEnableVertexAttribArray(0);
+
+
+	/* Texture coordinates buffer */
+
+	float texcoordsExp[] = {
+		0.0f, 0.0f,    // (u,v) for v0
+		0.0f, 1.0f,   // (u,v) for v1
+		1.0f, 1.0f,   // (u,v) for v2
+		1.0f, 0.0f     // (u,v) for v3
+	};
+
+	// Create handle
+	glGenBuffers(1, &textcoordBufferExp);
+	//Bind buffer
+	glBindBuffer(GL_ARRAY_BUFFER, textcoordBufferExp);
+	//Put data in buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(texcoordsExp), texcoordsExp, GL_STATIC_DRAW);
+	// Add data as VAO attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
+	// Enable attribute
+	glEnableVertexAttribArray(2);
+
+	
+	/* Create EBO */
+
+	const int indicesExp[] = {
+		0, 1, 3, // Triangle 1
+		1, 2, 3  // Triangle 2
+	};
+	glGenBuffers(1, &indexBufferExp);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferExp);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesExp), indicesExp, GL_STATIC_DRAW);
+
+
+
+	/* Textures */
+	
+	image = stbi_load("../scenes/explosion.png", &w, &h, &comp, STBI_rgb_alpha);
+
+	// Create texture handle
+	glGenTextures(1, &textureExp);
+	// Bind texture
+	glBindTexture(GL_TEXTURE_2D, textureExp);
+	// Upload data to buffer
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	// image no longer needed, free memory
+	free(image);
+
+	// Sampling
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	// Sets the type of filtering to be used on magnifying and
+	// minifying the active texture. These are the nicest available options.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16.0f);
+
 }
 
 void display(void)
@@ -127,11 +280,66 @@ void display(void)
 	glUniformMatrix4fv(loc, 1, false, &projectionMatrix[0].x);
 
 	loc = glGetUniformLocation(shaderProgram, "cameraPosition");
-	glUniform3f(loc, camera_pan, 0, 0);
+	glUniform3f(loc, camera_pan*20, 0, 0);
 
 	// >>> @task 3.1
+	
+
+
+	// GUI options
+
+	//Minifying
+
+	GLint miniOpt = 0;
+
+	switch (mini) {
+	case 0: miniOpt = GL_NEAREST; break;
+	case 1:miniOpt = GL_LINEAR; break;
+	case 2: miniOpt = GL_NEAREST_MIPMAP_NEAREST; break;
+	case 3: miniOpt = GL_NEAREST_MIPMAP_LINEAR; break;
+	case 4: miniOpt = GL_LINEAR_MIPMAP_NEAREST; break;
+	case 5: miniOpt = GL_LINEAR_MIPMAP_LINEAR; break;
+	}
+
+	//Magnifying
+
+	GLint magOpt = 0;
+
+	switch (mag) {
+	case 0: magOpt = GL_NEAREST; break;
+	case 1:magOpt = GL_LINEAR; break;
+	}
+
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	// Filtering
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, miniOpt);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magOpt);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropy);
+
 
 	glBindVertexArray(vertexArrayObject);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+
+	/* Drawing Explosion */
+
+	// Blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureExp);
+
+	// Filtering
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, miniOpt);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magOpt);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropy);
+
+	glBindVertexArray(vertexArrayObjectExp);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
