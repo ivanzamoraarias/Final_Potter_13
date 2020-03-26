@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp is up-to-date.
+  imgui.cpp
+  imgui_draw.cpp
+  Generating Code...
+  imgui.vcxproj -> C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\Release\imgui.lib

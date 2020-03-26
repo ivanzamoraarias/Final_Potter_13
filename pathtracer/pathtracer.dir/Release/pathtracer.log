@@ -1,0 +1,14 @@
+﻿  Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/pathtracer/CMakeFiles/generate.stamp is up-to-date.
+  main.cpp
+  Pathtracer.cpp
+  sampling.cpp
+  HDRImage.cpp
+  embree.cpp
+C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\pathtracer\embree.cpp(56,1): warning C4996: 'rtcDeviceSetErrorFunction': was declared deprecated
+C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external\embree2\include\embree2\rtcore.h(233): message : see declaration of 'rtcDeviceSetErrorFunction'
+  material.cpp
+C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\pathtracer\material.cpp(66,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\pathtracer\Pathtracer.cpp(210): warning C4715: 'pathtracer::Li': not all control paths return a value
+  pathtracer.vcxproj -> C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\bin\pathtracer.exe

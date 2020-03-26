@@ -1,6 +1,6 @@
 cmake_minimum_required ( VERSION 3.0.2 )
 
-project ( computer-graphics-labs )
+project ( Computer_Graphics_Project )
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "" FORCE)
@@ -37,11 +37,5 @@ set ( CMAKE_BUILD_TYPE DEBUG )
 set ( CMAKE_CXX_STANDARD 11 )
 
 add_subdirectory ( labhelper )
-add_subdirectory ( lab1-rasterization )
-add_subdirectory ( lab2-textures )
-add_subdirectory ( lab3-camera )
-add_subdirectory ( lab4-shading )
-add_subdirectory ( lab5-rendertotexture )
-add_subdirectory ( lab6-shadowmaps )
 add_subdirectory ( pathtracer )
 add_subdirectory ( project )

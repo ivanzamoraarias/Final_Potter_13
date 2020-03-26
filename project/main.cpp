@@ -116,8 +116,10 @@ void initGL()
 	///////////////////////////////////////////////////////////////////////
 	// Load models and set up model matrices
 	///////////////////////////////////////////////////////////////////////
-	fighterModel = labhelper::loadModelFromOBJ("../scenes/NewShip.obj");
-	landingpadModel = labhelper::loadModelFromOBJ("../scenes/landingpad.obj");
+
+	fighterModel = labhelper::loadModelFromOBJ("../scenes/ffxiii/FF13_360_CHARACTER_Claire_Farron_Default.obj");
+	//fighterModel = labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj");
+	landingpadModel = labhelper::loadModelFromOBJ("../scenes/harry_potter/hallway/Sepia_Hallway.obj");
 	sphereModel = labhelper::loadModelFromOBJ("../scenes/sphere.obj");
 
 	roomModelMatrix = mat4(1.0f);
@@ -188,6 +190,7 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::setUniformSlow(currentShaderProgram, "viewInverse", inverse(viewMatrix));
 
 	// landing pad
+	landingPadModelMatrix = scale(vec3(0.05f, 0.05f, 0.05f));
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewProjectionMatrix",
 	                          projectionMatrix * viewMatrix * landingPadModelMatrix);
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewMatrix", viewMatrix * landingPadModelMatrix);
@@ -197,6 +200,7 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::render(landingpadModel);
 
 	// Fighter
+	fighterModelMatrix = scale(vec3(5.0f, 5.0f, 5.0f));
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewProjectionMatrix",
 	                          projectionMatrix * viewMatrix * fighterModelMatrix);
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewMatrix", viewMatrix * fighterModelMatrix);

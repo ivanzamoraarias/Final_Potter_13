@@ -58,6 +58,16 @@ extern struct PointLight
 	vec3 position;
 } point_light;
 
+
+extern struct DiskLight
+{
+	float intensity_multiplier;
+	vec3 color;
+	vec3 position;
+	float radius;
+	vec3 normal;
+}disk_lights[];
+
 ///////////////////////////////////////////////////////////////////////////
 // Restart rendering of image
 ///////////////////////////////////////////////////////////////////////////

@@ -75,9 +75,26 @@ void initialize()
 	///////////////////////////////////////////////////////////////////////////
 	// Set up light
 	///////////////////////////////////////////////////////////////////////////
+	
+	// Point Light
+	
 	pathtracer::point_light.intensity_multiplier = 2500.0f;
 	pathtracer::point_light.color = vec3(1.f, 1.f, 1.f);
 	pathtracer::point_light.position = vec3(10.0f, 40.0f, 10.0f);
+	
+
+	// Disk Light
+	pathtracer::disk_lights[0].intensity_multiplier = 2500.0f;
+	pathtracer::disk_lights[0].color = vec3(1.f, 1.f, 1.f);
+	pathtracer::disk_lights[0].position = vec3(0.0f, 30.0f, 30.0f);
+	pathtracer::disk_lights[0].radius = 10.0f;
+	pathtracer::disk_lights[0].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[0].position);
+
+	pathtracer::disk_lights[1].intensity_multiplier = 2500.0f;
+	pathtracer::disk_lights[1].color = vec3(1.f, 1.f, 1.f);
+	pathtracer::disk_lights[1].position = vec3(-30.0f, 30.0f, 0.0f);
+	pathtracer::disk_lights[1].radius = 10.0f;
+	pathtracer::disk_lights[1].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[1].position);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Load environment map
@@ -88,12 +105,15 @@ void initialize()
 	///////////////////////////////////////////////////////////////////////////
 	// Load .obj models to scene
 	///////////////////////////////////////////////////////////////////////////
-	models.push_back(
-	    make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
+	
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/Sepia_Hallway.obj"), translate(vec3(0.0f, 0.0f, 0.0f))));
+
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
-
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(0.0f, 8.0f, 0.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(-15.0f, 5.0f, 0.0f))));
 	///////////////////////////////////////////////////////////////////////////
 	// Add models to pathtracer scene
 	///////////////////////////////////////////////////////////////////////////
@@ -394,10 +414,26 @@ void gui()
 	///////////////////////////////////////////////////////////////////////////
 	if(ImGui::CollapsingHeader("Light sources", "lights_ch", true, true))
 	{
+		
 		ImGui::SliderFloat("Environment multiplier", &pathtracer::environment.multiplier, 0.0f, 10.0f);
+		/*
 		ImGui::ColorEdit3("Point light color", &pathtracer::point_light.color.x);
 		ImGui::SliderFloat("Point light intensity multiplier", &pathtracer::point_light.intensity_multiplier,
 		                   0.0f, 10000.0f);
+						   */
+						   
+
+		ImGui::ColorEdit3("Disk Light 1 color", &pathtracer::disk_lights[0].color.x);
+		ImGui::SliderFloat("Disk Light 1 intensity multiplier", &pathtracer::disk_lights[0].intensity_multiplier,
+			0.0f, 10000.0f);
+		ImGui::SliderFloat("Disk Light 1 radius", &pathtracer::disk_lights[0].radius,
+			0.0f, 100.0f);
+
+		ImGui::ColorEdit3("Disk Light 2 color", &pathtracer::disk_lights[1].color.x);
+		ImGui::SliderFloat("Disk Light 2 intensity multiplier", &pathtracer::disk_lights[1].intensity_multiplier,
+			0.0f, 10000.0f);
+		ImGui::SliderFloat("Disk Light 2 radius", &pathtracer::disk_lights[1].radius,
+			0.0f, 100.0f);
 	}
 
 	ImGui::End(); // Control Panel

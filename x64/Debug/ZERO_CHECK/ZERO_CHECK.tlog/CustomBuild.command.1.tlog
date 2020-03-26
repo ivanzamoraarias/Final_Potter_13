@@ -1,0 +1,10 @@
+^C:\USERS\RICKY\DOCUMENTS\CHALMERS\SP2\COMPUTER_GRAPHICS\COMPUTER_GRAPHICS_PROJECT\CMAKEFILES\7407EBD9BADD6CCC21D16E8C9F62D770\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/Computer_Graphics_Project.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

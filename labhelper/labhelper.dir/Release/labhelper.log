@@ -1,0 +1,7 @@
+﻿  Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/CMakeFiles/generate.stamp is up-to-date.
+  labhelper.cpp
+  Model.cpp
+  imgui_impl_sdl_gl3.cpp
+  Generating Code...
+  labhelper.vcxproj -> C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\Release\labhelper.lib

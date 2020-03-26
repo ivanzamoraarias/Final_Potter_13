@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\labhelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\labhelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{75BDE7E1-232B-374A-B98C-A2CFB2648335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EA9E8014-B879-36CC-AFDE-525544A1E6D5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
