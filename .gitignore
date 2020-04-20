@@ -12,6 +12,7 @@
 # Nuestros achivos
 pathtracer/pathtracer.dir/*
 CMakeCache.txt
+build/*
 
 # User-specific files
 *.rsuser
