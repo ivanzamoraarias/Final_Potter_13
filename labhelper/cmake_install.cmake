@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper
+# Install script for directory: C:/Users/Ivan/Repos/Final_Potter_13/labhelper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/imgui/cmake_install.cmake")
+  include("C:/Users/Ivan/Repos/Final_Potter_13/labhelper/imgui/cmake_install.cmake")
 
 endif()
 

@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\labhelper.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\labhelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\Model.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\imgui_impl_sdl_gl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\labhelper.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\labhelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\Model.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\imgui_impl_sdl_gl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Ivan\Repos\Final_Potter_13\labhelper\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{E7A7A578-0E03-354C-B1AF-87383C4F7E53}</UniqueIdentifier>
+      <UniqueIdentifier>{A5CB4EC6-3A2F-369C-9308-B3D6B66219BA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{9EB9C4BF-24C1-3E62-A801-E3991EDB1284}</UniqueIdentifier>
+      <UniqueIdentifier>{CF0F4F44-FDB0-35F9-93B4-1F5D6ADC68B5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

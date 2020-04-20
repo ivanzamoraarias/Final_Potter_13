@@ -106,7 +106,7 @@ void initialize()
 	// Load .obj models to scene
 	///////////////////////////////////////////////////////////////////////////
 	
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj"), translate(vec3(0.0f, 0.0f, 0.0f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ffxiii/FF13_360_CHARACTER_Claire_Farron_Default.obj"), translate(vec3(0.0f, 10.0f, 0.0f))*scale(vec3(10.0f,10.0f,10.0f))));
 
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
 	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer
+# Install script for directory: C:/Users/Ivan/Repos/Final_Potter_13/pathtracer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

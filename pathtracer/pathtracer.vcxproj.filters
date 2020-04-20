@@ -1,62 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\main.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Pathtracer.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\Pathtracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\sampling.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\sampling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\HDRImage.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\HDRImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\embree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\material.cpp">
+    <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Pathtracer.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\Pathtracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\sampling.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\sampling.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\HDRImage.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\HDRImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\embree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\material.h">
+    <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\simple.frag">
+    <None Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\simple.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\simple.vert">
+    <None Include="C:\Users\Ivan\Repos\Final_Potter_13\pathtracer\simple.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{E7A7A578-0E03-354C-B1AF-87383C4F7E53}</UniqueIdentifier>
+      <UniqueIdentifier>{A5CB4EC6-3A2F-369C-9308-B3D6B66219BA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
-      <UniqueIdentifier>{6755E0A0-DBBC-33C9-990F-878251400EEA}</UniqueIdentifier>
+      <UniqueIdentifier>{4929F7A9-5C84-3754-A27D-7F25BF05031C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{9EB9C4BF-24C1-3E62-A801-E3991EDB1284}</UniqueIdentifier>
+      <UniqueIdentifier>{CF0F4F44-FDB0-35F9-93B4-1F5D6ADC68B5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

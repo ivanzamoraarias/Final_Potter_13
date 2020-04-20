@@ -1,13 +1,9 @@
 # CMake generation dependency list for this directory.
-C:/Program Files/CMake/share/cmake-3.14/Modules/CMakeParseImplicitLinkInfo.cmake
-C:/Program Files/CMake/share/cmake-3.14/Modules/FindOpenMP.cmake
-C:/Program Files/CMake/share/cmake-3.14/Modules/FindPackageHandleStandardArgs.cmake
-C:/Program Files/CMake/share/cmake-3.14/Modules/FindPackageMessage.cmake
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/CMakeFiles/FindOpenMP/OpenMPCheckVersion.c
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/CMakeFiles/FindOpenMP/OpenMPCheckVersion.cpp
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/CMakeFiles/FindOpenMP/OpenMPTryFlag.c
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/VSUserTemplate.user
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/embree2/embree-config-version.cmake
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/embree2/embree-config.cmake
-C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.16/Modules/CMakeParseImplicitLinkInfo.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindOpenMP.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageMessage.cmake
+C:/Users/Ivan/Repos/Final_Potter_13/VSUserTemplate.user
+C:/Users/Ivan/Repos/Final_Potter_13/external/embree2/embree-config-version.cmake
+C:/Users/Ivan/Repos/Final_Potter_13/external/embree2/embree-config.cmake
+C:/Users/Ivan/Repos/Final_Potter_13/pathtracer/CMakeLists.txt
