@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{59069CC6-218B-3064-A215-03864D9DB2B1}</ProjectGuid>
+    <ProjectGuid>{EED629E2-0828-3BFD-BB91-5FB0C2152B66}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -50,22 +50,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -83,10 +83,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -117,10 +117,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -133,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -150,10 +150,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -165,10 +165,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -176,12 +176,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -189,12 +189,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -202,24 +202,24 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51/CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\imconfig.h" />
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui.cpp" />
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui.h" />
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui_draw.cpp" />
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui_internal.h" />
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_rect_pack.h" />
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_textedit.h" />
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_truetype.h" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\imconfig.h" />
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui.cpp" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui.h" />
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui_draw.cpp" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\imgui_internal.h" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_rect_pack.h" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_textedit.h" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51\stb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\ZERO_CHECK.vcxproj">
-      <Project>{37EF5982-3F27-36AC-AB8E-DF1159995D5E}</Project>
+    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\ZERO_CHECK.vcxproj">
+      <Project>{04CD0F7C-000C-30D4-B1E9-60E72322A1EE}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

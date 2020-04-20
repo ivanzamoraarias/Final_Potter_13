@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external_src/imgui-1.51
+# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external_src/imgui-1.51
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

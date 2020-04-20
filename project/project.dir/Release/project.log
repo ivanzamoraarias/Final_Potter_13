@@ -1,3 +1,10 @@
-﻿  main.cpp
-     Creating library C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/project/Release/project.lib and object C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/project/Release/project.exp
-  project.vcxproj -> C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\bin\project.exe
+﻿  Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/project/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/project/CMakeFiles/generate.stamp is up-to-date.
+  main.cpp
+  fbo.cpp
+  hdr.cpp
+  heightfield.cpp
+  ParticleSystem.cpp
+  Generating Code...
+     Creating library C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/project/Release/project.lib and object C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/project/Release/project.exp
+  project.vcxproj -> C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\bin\project.exe

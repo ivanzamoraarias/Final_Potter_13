@@ -1,83 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\main.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\fbo.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\fbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\hdr.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\hdr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\heightfield.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\heightfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ParticleSystem.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ParticleSystem.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ParticleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\background.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\background.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\background.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\background.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\heightfield.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\heightfield.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\heightfield.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\heightfield.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\particle.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\particle.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\particle.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\particle.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\shading.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\shading.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\shading.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\shading.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\simple.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\simple.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\simple.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\simple.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ssaoInput.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ssaoInput.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ssaoInput.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ssaoInput.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ssaoOutput.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ssaoOutput.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\SP2\computer_graphics\Computer_Graphics_Project\project\ssaoOutput.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\project\ssaoOutput.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{75BDE7E1-232B-374A-B98C-A2CFB2648335}</UniqueIdentifier>
+      <UniqueIdentifier>{E7A7A578-0E03-354C-B1AF-87383C4F7E53}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
-      <UniqueIdentifier>{A0B98F36-7F96-3826-BEFA-B3B299B279C4}</UniqueIdentifier>
+      <UniqueIdentifier>{6755E0A0-DBBC-33C9-990F-878251400EEA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{EA9E8014-B879-36CC-AFDE-525544A1E6D5}</UniqueIdentifier>
+      <UniqueIdentifier>{9EB9C4BF-24C1-3E62-A801-E3991EDB1284}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

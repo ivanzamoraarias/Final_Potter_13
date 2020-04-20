@@ -4,8 +4,8 @@ C:/Program Files/CMake/share/cmake-3.14/Modules/FindOpenGL.cmake
 C:/Program Files/CMake/share/cmake-3.14/Modules/FindPackageHandleStandardArgs.cmake
 C:/Program Files/CMake/share/cmake-3.14/Modules/FindPackageMessage.cmake
 C:/Program Files/CMake/share/cmake-3.14/Modules/SelectLibraryConfigurations.cmake
-C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external/glm/glm-config-version.cmake
-C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external/glm/glm-config.cmake
-C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external/sdl2/sdl2-config-version.cmake
-C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/external/sdl2/sdl2-config.cmake
-C:/Users/ricky/Documents/Chalmers/SP2/computer_graphics/Computer_Graphics_Project/labhelper/CMakeLists.txt
+C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/glm/glm-config-version.cmake
+C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/glm/glm-config.cmake
+C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/sdl2/sdl2-config-version.cmake
+C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/external/sdl2/sdl2-config.cmake
+C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt
