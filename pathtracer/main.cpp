@@ -242,7 +242,7 @@ bool handleEvents(void)
 		// check keyboard state (which keys are still pressed)
 		const uint8_t* state = SDL_GetKeyboardState(nullptr);
 		vec3 cameraRight = cross(cameraDirection, worldUp);
-		const float speed = 10.f;
+		const float speed = 30.f;
 		if(state[SDL_SCANCODE_W])
 		{
 			cameraPosition += deltaTime * speed * cameraDirection;
