@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\lab1-rasterization\lab1_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\lab1-rasterization\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\lab1-rasterization\simple.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\lab1-rasterization\simple.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{CA178F9E-94B5-3828-A4CC-F5E9C4F4BD8C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CDB16B22-E58D-33E5-8C44-5085E9F319DF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

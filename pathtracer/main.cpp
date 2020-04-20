@@ -106,10 +106,10 @@ void initialize()
 	// Load .obj models to scene
 	///////////////////////////////////////////////////////////////////////////
 	
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/hallway/Sepia_Hallway.obj"), translate(vec3(0.0f, 0.0f, 0.0f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/hallway/Sepia_Hallway.obj"), translate(vec3(0.0f, 0.0f, -800.0f))));
 
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
-	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(0.0f, 8.0f, 0.0f))));

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\stb_rect_pack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\stb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\stb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{90B96F73-88C2-35B3-85A5-62CC0DAEE4C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CDB16B22-E58D-33E5-8C44-5085E9F319DF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
