@@ -249,7 +249,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\project\hdr.cpp" />
     <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\project\heightfield.cpp" />
     <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\project\ParticleSystem.cpp" />
+    <ClCompile Include="Noise.cpp" />
+    <ClCompile Include="PerlingNoise.cpp" />
+    <ClCompile Include="terrainGenerator.cpp" />
     <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\project\ParticleSystem.h" />
+    <ClInclude Include="Noise.h" />
+    <ClInclude Include="terrainGenerator.h" />
     <None Include="C:\Users\Ivan\Repos\Final_Potter_13\project\background.frag" />
     <None Include="C:\Users\Ivan\Repos\Final_Potter_13\project\background.vert" />
     <None Include="C:\Users\Ivan\Repos\Final_Potter_13\project\heightfield.frag" />

@@ -22,11 +22,10 @@ using namespace glm;
 #include "hdr.h"
 #include "fbo.h"
 
-
-
-
 using std::min;
 using std::max;
+
+#include "terrainGenerator.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Various globals
@@ -88,6 +87,43 @@ mat4 roomModelMatrix;
 mat4 landingPadModelMatrix;
 mat4 fighterModelMatrix;
 
+terrainGenerator* terrain = new terrainGenerator(1200.0f,1200.0f,20.0f);
+
+void drawTerrain() {
+	GLuint terrainVertexArrayObject;
+	const float* positions = terrain->getVerticesPosition();
+	int a = sizeof(positions);
+	GLuint positionBuffer;
+	glGenBuffers(1, &positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+
+	const float colors[] = {
+		1.0f, 1.0f, 1.0f, 
+		1.0f, 0.0f, 0.0f, 
+		1.0f, 0.498039f, 1.0f 
+	};
+
+	GLuint colorBuffer;
+	glGenBuffers(1, &colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+	glGenVertexArrays(1, &terrainVertexArrayObject);
+	glBindVertexArray(terrainVertexArrayObject);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	glVertexAttribPointer(1, 3, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
+	glEnableVertexAttribArray(0); // Enable the vertex position attribute
+	glEnableVertexAttribArray(1); // Enable the vertex color attribute
+
+	glUseProgram(shaderProgram);
+
+
+	glBindVertexArray(terrainVertexArrayObject);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
 void loadShaders(bool is_reload)
 {
 	GLuint shader = labhelper::loadShaderProgram("../project/simple.vert", "../project/simple.frag",
@@ -145,9 +181,11 @@ void initGL()
 
 }
 
-void debugDrawLight(const glm::mat4& viewMatrix,
-                    const glm::mat4& projectionMatrix,
-                    const glm::vec3& worldSpaceLightPos)
+void debugDrawLight(
+	const glm::mat4& viewMatrix,               
+	const glm::mat4& projectionMatrix,                
+	const glm::vec3& worldSpaceLightPos
+)
 {
 	mat4 modelMatrix = glm::translate(worldSpaceLightPos);
 	glUseProgram(shaderProgram);
@@ -208,6 +246,14 @@ void drawScene(GLuint currentShaderProgram,
 	                          inverse(transpose(viewMatrix * fighterModelMatrix)));
 
 	labhelper::render(fighterModel);
+
+
+
+
+
+
+
+
 }
 
 
@@ -261,6 +307,8 @@ void display(void)
 	drawBackground(viewMatrix, projMatrix);
 	drawScene(shaderProgram, viewMatrix, projMatrix, lightViewMatrix, lightProjMatrix);
 	debugDrawLight(viewMatrix, projMatrix, vec3(lightPosition));
+
+	drawTerrain();
 
 
 

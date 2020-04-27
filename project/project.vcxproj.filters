@@ -16,11 +16,18 @@
     <ClCompile Include="C:\Users\Ivan\Repos\Final_Potter_13\project\ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PerlingNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Noise.cpp" />
+    <ClCompile Include="terrainGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Ivan\Repos\Final_Potter_13\project\ParticleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Noise.h" />
+    <ClInclude Include="terrainGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\Ivan\Repos\Final_Potter_13\project\CMakeLists.txt" />

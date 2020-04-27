@@ -98,7 +98,7 @@ vec3 calculateDirectIllumiunation(vec3 wo, vec3 n, vec3 base_color)
 	float masking_function = getShadowingMasking(n,wo,wi,wh);
 	float brdf = getbrdf(fresnel, microfacet_function,masking_function, n,wo,wi);
 	vec3 dialetic_term = brdf * dot(n, wi)*Li+(1-fresnel)*diffuse_term;
-	vec3 metal_term = brdf * material_color * dot(n, wi)*Li;
+	vec3 metal_term = brdf * base_color * dot(n, wi)*Li;
 	vec3 microfacet_term = material_metalness*metal_term+(1-material_metalness)*dialetic_term;
 	return material_reflectivity*microfacet_term+(1-material_reflectivity)*diffuse_term;
 }
@@ -121,7 +121,7 @@ vec3 calculateIndirectIllumination(vec3 wo, vec3 n, vec3 base_color)
 	// Use these to lookup the color in the environment map
 	vec2 lookup = getSphericalCoords(dir);
 	vec4 irraduance = environment_multiplier * texture(irradianceMap, lookup);
-	vec3 diffuse_term = material_color * (1.0f/PI) * irraduance.xyz ;
+	vec3 diffuse_term = base_color * (1.0f/PI) * irraduance.xyz ;
 	vec3 wit = mat3(viewInverse) * wo;
 	vec3 wi = normalize(reflect(-wo,n));
 	// Use these to lookup the color in the environment map
@@ -134,7 +134,7 @@ vec3 calculateIndirectIllumination(vec3 wo, vec3 n, vec3 base_color)
 			(1.0f-dot(wh,wi)),5
 		);
 	vec3 dialetic_term = fresnel*Li+(1-fresnel)*diffuse_term;
-	vec3 metal_term = fresnel*material_color*Li;
+	vec3 metal_term = fresnel*base_color*Li;
 	vec3 microfacet_term = material_metalness*metal_term+(1-material_metalness)*dialetic_term;
 	return material_reflectivity*microfacet_term+(1-material_reflectivity)*diffuse_term;
 }
