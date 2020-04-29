@@ -271,6 +271,7 @@ Model* loadModelFromOBJ(std::string path)
 					///////////////////////////////////////////////////////
 					for(int j = 0; j < 3; j++)
 					{
+						shape.mesh.indices[i * 3 + j].normal_index;
 						int v = shape.mesh.indices[i * 3 + j].vertex_index;
 						model->m_positions[vertices_so_far + j] =
 						    glm::vec3(attrib.vertices[shape.mesh.indices[i * 3 + j].vertex_index * 3 + 0],
@@ -522,5 +523,37 @@ void render(const Model* model, const bool submitMaterials)
 		}
 		glDrawArrays(GL_TRIANGLES, mesh.m_start_index, (GLsizei)mesh.m_number_of_vertices);
 	}
+}
+bool loadMaterials(Model* model)
+{
+	tinyobj::attrib_t attrib;
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	std::string err;
+	// Expect '.mtl' file in the same directory and triangulate meshes
+	bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err,
+		"../scenes/terrain.obj", "../scenes", true);
+
+	for (const auto& m : materials) {
+
+		Material material;
+		material.m_name = m.name;
+		material.m_color = glm::vec3(m.diffuse[0], m.diffuse[1], m.diffuse[2]);
+		material.m_reflectivity = m.specular[0];
+		material.m_metalness = m.metallic;
+		material.m_fresnel = m.sheen;
+		material.m_shininess = m.roughness;
+		material.m_emission = m.emission[0];
+		material.m_transparency = m.transmittance[0];
+		model->m_materials.push_back(material);
+	}
+	return true;
+}
+void renderSimpleModel(const Model* model)
+{
+	float lastIndex = sizeof(model->m_positions) - 1;
+	glBindVertexArray(model->m_vaob);
+	
+	glDrawArrays(GL_TRIANGLES, 0, 1440000);
 }
 } // namespace labhelper

@@ -8,8 +8,9 @@ public:
 	~terrainGenerator();
 
 	std::vector <glm::vec3> vertices;
-	float* getVerticesPosition();
+	std::vector<glm::vec3> getVerticesPosition();
 	void createTerrain();
+	std::vector<glm::vec3> getNormals();
 private:
 	int cols, rows;
 	float scl;

@@ -82,46 +82,64 @@ vec3 worldUp(0.0f, 1.0f, 0.0f);
 labhelper::Model* fighterModel = nullptr;
 labhelper::Model* landingpadModel = nullptr;
 labhelper::Model* sphereModel = nullptr;
+labhelper::Model* terrainModel = nullptr;
 
 mat4 roomModelMatrix;
 mat4 landingPadModelMatrix;
 mat4 fighterModelMatrix;
+mat4 terrainModelMatrix;
 
-terrainGenerator* terrain = new terrainGenerator(1200.0f,1200.0f,20.0f);
+terrainGenerator* terrain = new terrainGenerator(300.0f,300.0f,10.0f);
 
-void drawTerrain() {
+labhelper::Model* createTerrainModel() {
 	GLuint terrainVertexArrayObject;
-	const float* positions = terrain->getVerticesPosition();
-	int a = sizeof(positions);
-	GLuint positionBuffer;
-	glGenBuffers(1, &positionBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
 
-	const float colors[] = {
-		1.0f, 1.0f, 1.0f, 
-		1.0f, 0.0f, 0.0f, 
-		1.0f, 0.498039f, 1.0f 
-	};
+	labhelper::Model* model = new labhelper::Model;
 
-	GLuint colorBuffer;
-	glGenBuffers(1, &colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-	glGenVertexArrays(1, &terrainVertexArrayObject);
-	glBindVertexArray(terrainVertexArrayObject);
-	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
-	glVertexAttribPointer(0, 3, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
-	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glVertexAttribPointer(1, 3, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
-	glEnableVertexAttribArray(0); // Enable the vertex position attribute
-	glEnableVertexAttribArray(1); // Enable the vertex color attribute
-
-	glUseProgram(shaderProgram);
+	model->m_name = "terrain";
+	model->m_filename = "terrain.obj";
 
 
-	glBindVertexArray(terrainVertexArrayObject);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	model->m_positions = terrain->getVerticesPosition();
+	model->m_normals = terrain->getNormals();
+	int sizeOfVertices = sizeof(model->m_positions);
+	model->m_texture_coordinates.resize(sizeOfVertices);
+
+	for (int i = 0; i < sizeOfVertices; i++) {
+		model->m_texture_coordinates[i] = glm::vec2(0.0f);
+	}
+
+
+	labhelper::loadMaterials(model);
+	
+
+	
+
+	///////////////////////////////////////////////////////////////////////
+	// Upload to GPU
+	///////////////////////////////////////////////////////////////////////
+	glGenVertexArrays(1, &model->m_vaob);
+	glBindVertexArray(model->m_vaob);
+	glGenBuffers(1, &model->m_positions_bo);
+	glBindBuffer(GL_ARRAY_BUFFER, model->m_positions_bo);
+	glBufferData(GL_ARRAY_BUFFER, model->m_positions.size() * sizeof(glm::vec3), &model->m_positions[0].x,
+		GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+	glEnableVertexAttribArray(0);
+	glGenBuffers(1, &model->m_normals_bo);
+	glBindBuffer(GL_ARRAY_BUFFER, model->m_normals_bo);
+	glBufferData(GL_ARRAY_BUFFER, model->m_normals.size() * sizeof(glm::vec3), &model->m_normals[0].x,
+		GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+	glEnableVertexAttribArray(1);
+	glGenBuffers(1, &model->m_texture_coordinates_bo);
+	glBindBuffer(GL_ARRAY_BUFFER, model->m_texture_coordinates_bo);
+	glBufferData(GL_ARRAY_BUFFER, model->m_texture_coordinates.size() * sizeof(glm::vec2),
+		&model->m_texture_coordinates[0].x, GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
+	glEnableVertexAttribArray(2);
+
+	return model;
 }
 
 void loadShaders(bool is_reload)
@@ -158,10 +176,15 @@ void initGL()
 	landingpadModel = labhelper::loadModelFromOBJ("../scenes/harry_potter/hallway/Sepia_Hallway.obj");
 	sphereModel = labhelper::loadModelFromOBJ("../scenes/sphere.obj");
 
+	terrainModel = createTerrainModel();
+
+
+
 	roomModelMatrix = mat4(1.0f);
 	fighterModelMatrix = translate(15.0f * worldUp);
 	landingPadModelMatrix = mat4(1.0f);
 
+	terrainModelMatrix = mat4(1.0f);
 	///////////////////////////////////////////////////////////////////////
 	// Load environment map
 	///////////////////////////////////////////////////////////////////////
@@ -249,8 +272,14 @@ void drawScene(GLuint currentShaderProgram,
 
 
 
+	terrainModelMatrix = translate(vec3(0.0f, -50.0f, 0.0f)) * rotate(1.57f,vec3(1,0,0));
+	labhelper::setUniformSlow(currentShaderProgram, "modelViewProjectionMatrix",
+		projectionMatrix * viewMatrix * terrainModelMatrix);
+	labhelper::setUniformSlow(currentShaderProgram, "modelViewMatrix", viewMatrix * terrainModelMatrix);
+	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
+		inverse(transpose(viewMatrix * terrainModelMatrix)));
 
-
+	labhelper::renderSimpleModel(terrainModel);
 
 
 
@@ -308,7 +337,6 @@ void display(void)
 	drawScene(shaderProgram, viewMatrix, projMatrix, lightViewMatrix, lightProjMatrix);
 	debugDrawLight(viewMatrix, projMatrix, vec3(lightPosition));
 
-	drawTerrain();
 
 
 

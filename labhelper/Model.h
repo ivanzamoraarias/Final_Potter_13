@@ -78,4 +78,6 @@ Model* loadModelFromOBJ(std::string filename);
 void saveModelToOBJ(Model* model, std::string filename);
 void freeModel(Model* model);
 void render(const Model* model, const bool submitMaterials = true);
+bool loadMaterials(Model* model);
+void renderSimpleModel(const Model* model);
 } // namespace labhelper
