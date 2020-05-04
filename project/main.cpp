@@ -26,6 +26,7 @@ using std::min;
 using std::max;
 
 #include "terrainGenerator.h"
+#include "heightfield.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Various globals
@@ -47,6 +48,7 @@ bool g_isMouseDragging = false;
 GLuint shaderProgram;       // Shader for rendering the final image
 GLuint simpleShaderProgram; // Shader used to draw the shadow map
 GLuint backgroundProgram;
+GLuint terrainProgram;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Environment
@@ -89,10 +91,11 @@ mat4 landingPadModelMatrix;
 mat4 fighterModelMatrix;
 mat4 terrainModelMatrix;
 
+HeightField hightFieldTerrain;
+
 terrainGenerator* terrain = new terrainGenerator(300.0f,300.0f,10.0f);
 
 labhelper::Model* createTerrainModel() {
-	GLuint terrainVertexArrayObject;
 
 	labhelper::Model* model = new labhelper::Model;
 
@@ -126,18 +129,18 @@ labhelper::Model* createTerrainModel() {
 		GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 	glEnableVertexAttribArray(0);
-	glGenBuffers(1, &model->m_normals_bo);
-	glBindBuffer(GL_ARRAY_BUFFER, model->m_normals_bo);
-	glBufferData(GL_ARRAY_BUFFER, model->m_normals.size() * sizeof(glm::vec3), &model->m_normals[0].x,
-		GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
-	glEnableVertexAttribArray(1);
-	glGenBuffers(1, &model->m_texture_coordinates_bo);
-	glBindBuffer(GL_ARRAY_BUFFER, model->m_texture_coordinates_bo);
-	glBufferData(GL_ARRAY_BUFFER, model->m_texture_coordinates.size() * sizeof(glm::vec2),
-		&model->m_texture_coordinates[0].x, GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
-	glEnableVertexAttribArray(2);
+	//glGenBuffers(1, &model->m_normals_bo);
+	//glBindBuffer(GL_ARRAY_BUFFER, model->m_normals_bo);
+	//glBufferData(GL_ARRAY_BUFFER, model->m_normals.size() * sizeof(glm::vec3), &model->m_normals[0].x,
+	//	GL_STATIC_DRAW);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+	//glEnableVertexAttribArray(1);
+	//glGenBuffers(1, &model->m_texture_coordinates_bo);
+	//glBindBuffer(GL_ARRAY_BUFFER, model->m_texture_coordinates_bo);
+	//glBufferData(GL_ARRAY_BUFFER, model->m_texture_coordinates.size() * sizeof(glm::vec2),
+	//	&model->m_texture_coordinates[0].x, GL_STATIC_DRAW);
+	//glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
+	//glEnableVertexAttribArray(2);
 
 	return model;
 }
@@ -155,6 +158,15 @@ void loadShaders(bool is_reload)
 	shader = labhelper::loadShaderProgram("../project/shading.vert", "../project/shading.frag", is_reload);
 	if(shader != 0)
 		shaderProgram = shader;
+
+	shader = labhelper::loadShaderProgram(
+		"../project/heightfield.vert", 
+		"../project/heightfield.frag", 
+		is_reload
+	);
+
+	if (shader != 0)
+		terrainProgram = shader;
 }
 
 void initGL()
@@ -167,6 +179,10 @@ void initGL()
 	shaderProgram = labhelper::loadShaderProgram("../project/shading.vert", "../project/shading.frag");
 	simpleShaderProgram = labhelper::loadShaderProgram("../project/simple.vert", "../project/simple.frag");
 
+	terrainProgram = labhelper::loadShaderProgram(
+		"../project/heightfield.vert",
+		"../project/heightfield.frag"
+	);
 	///////////////////////////////////////////////////////////////////////
 	// Load models and set up model matrices
 	///////////////////////////////////////////////////////////////////////
@@ -177,7 +193,7 @@ void initGL()
 	sphereModel = labhelper::loadModelFromOBJ("../scenes/sphere.obj");
 
 	terrainModel = createTerrainModel();
-
+	//hightFieldTerrain.generateMesh(1024);
 
 
 	roomModelMatrix = mat4(1.0f);
@@ -258,7 +274,7 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
 	                          inverse(transpose(viewMatrix * landingPadModelMatrix)));
 
-	labhelper::render(landingpadModel);
+	//labhelper::render(landingpadModel);
 
 	// Fighter
 	fighterModelMatrix = scale(vec3(5.0f, 5.0f, 5.0f));
@@ -268,16 +284,39 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
 	                          inverse(transpose(viewMatrix * fighterModelMatrix)));
 
-	labhelper::render(fighterModel);
+	//labhelper::render(fighterModel);
 
 
 
-	terrainModelMatrix = translate(vec3(0.0f, -50.0f, 0.0f)) * rotate(1.57f,vec3(1,0,0));
+	//glUseProgram(simpleShaderProgram);
+	//terrainModelMatrix = translate(vec3(0));
+	/*terrainModelMatrix = translate(vec3(0.0f, -50.0f, 0.0f)) * rotate(1.57f,vec3(1,0,0))* scale(vec3(5,5,5));
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewProjectionMatrix",
 		projectionMatrix * viewMatrix * terrainModelMatrix);
 	labhelper::setUniformSlow(currentShaderProgram, "modelViewMatrix", viewMatrix * terrainModelMatrix);
 	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
 		inverse(transpose(viewMatrix * terrainModelMatrix)));
+
+	labhelper::renderSimpleModel(terrainModel);*/
+
+	glUseProgram(terrainProgram);
+	//terrainModelMatrix = translate(vec3(0.0f, -50.0f, 0.0f)) * rotate(1.57f, vec3(1, 0, 0)) * scale(vec3(5, 5, 5));
+	//terrainModelMatrix = translate(vec3(0.0f,0.0f,0.0f));
+	labhelper::setUniformSlow(
+		terrainProgram,
+		"modelViewProjectionMatrix",
+		projectionMatrix * viewMatrix * terrainModelMatrix
+	);
+	labhelper::setUniformSlow(
+		terrainProgram,
+		"modelViewMatrix",
+		viewMatrix * terrainModelMatrix
+	);
+	labhelper::setUniformSlow(
+		terrainProgram,
+		"normalMatrix",
+		inverse(transpose(viewMatrix * terrainModelMatrix))
+	);
 
 	labhelper::renderSimpleModel(terrainModel);
 
@@ -337,6 +376,7 @@ void display(void)
 	drawScene(shaderProgram, viewMatrix, projMatrix, lightViewMatrix, lightProjMatrix);
 	debugDrawLight(viewMatrix, projMatrix, vec3(lightPosition));
 
+	
 
 
 

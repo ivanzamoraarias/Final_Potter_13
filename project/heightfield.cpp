@@ -83,8 +83,67 @@ void HeightField::loadDiffuseTexture(const std::string& diffusePath)
 
 void HeightField::generateMesh(int tesselation)
 {
+	std::vector <glm::vec3> vertices;
+	//std::vector<glm::vec3>vertices();
+	float scl = 30;
+
 	// generate a mesh in range -1 to 1 in x and z
 	// (y is 0 but will be altered in height field vertex shader)
+	int m_meshResolution = tesselation;
+
+	int size = m_meshResolution * m_meshResolution * 2 * 3 * 3;
+	float* positions = new float[size]();
+
+	double triangleWidth = 2 / m_meshResolution;
+	float startX = -1.0f;
+	float startZ = 1.0f;
+	float x1 = 0;
+	float x2 = 0;
+	float z1 = 0;
+	float z2 = 0;
+	int index = 0;
+	//For each row
+	for (int r = 0; r < m_meshResolution; r++) {
+		//For each column
+		for (int c = 0; c < m_meshResolution; c++) {
+			x1 = startX + c * scl;
+			x2 = startX + (c + 1) * scl;
+			z1 = startZ - r * scl;
+			z2 = startZ - (r + 1) * scl;
+			//Generate one triangle
+			vertices.push_back(glm::vec3(x1, 0, z1));
+			vertices.push_back(glm::vec3(x2, 0, z2));
+			vertices.push_back(glm::vec3(x2, 0, z1));
+
+			//Generate other triangle
+			vertices.push_back(glm::vec3(x1, 0, z1));
+			vertices.push_back(glm::vec3(x1, 0, z2));
+			vertices.push_back(glm::vec3(x2, 0, z2));
+
+		}
+	}
+
+	
+	glEnable(GL_PRIMITIVE_RESTART);
+	glPrimitiveRestartIndex(UINT32_MAX);
+
+	GLuint vertexArrayObject;
+	GLuint positionBuffer;
+	glGenBuffers(1, &positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+	glBufferData(
+		GL_ARRAY_BUFFER, 
+		vertices.size()*sizeof(glm::vec3), 
+		&vertices[0].x, 
+		GL_STATIC_DRAW
+	);
+
+	glGenVertexArrays(1, &vertexArrayObject);
+	glBindVertexArray(vertexArrayObject);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false/*normalized*/, 0/*stride*/, 0/*offset*/);
+	glEnableVertexAttribArray(0);
+
 }
 
 void HeightField::submitTriangles(void)
