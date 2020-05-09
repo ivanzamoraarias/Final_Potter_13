@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs
+# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/computer-graphics-labs")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Computer_Graphics_Project")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,15 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/labhelper/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab1-rasterization/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab2-textures/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab3-camera/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab4-shading/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab5-rendertotexture/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/lab6-shadowmaps/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/pathtracer/cmake_install.cmake")
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/project/cmake_install.cmake")
+  include("C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/labhelper/cmake_install.cmake")
+  include("C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/pathtracer/cmake_install.cmake")
+  include("C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/project/cmake_install.cmake")
 
 endif()
 
@@ -54,5 +48,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -523,4 +523,67 @@ void render(const Model* model, const bool submitMaterials)
 		glDrawArrays(GL_TRIANGLES, mesh.m_start_index, (GLsizei)mesh.m_number_of_vertices);
 	}
 }
+
+bool loadMaterials(Model* model)
+{
+	tinyobj::attrib_t attrib;
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	std::string err;
+	// Expect '.mtl' file in the same directory and triangulate meshes
+	/*bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err,
+		"../scenes/terrain.obj", "../scenes", true);*/
+
+	std::string path = "../scenes/terrain.obj";
+
+	size_t separator = path.find_last_of("\\/");
+	std::string filename, extension, directory;
+	if (separator != std::string::npos)
+	{
+		filename = path.substr(separator + 1, path.size() - separator - 1);
+		directory = path.substr(0, separator + 1);
+	}
+	else
+	{
+		filename = path;
+		directory = "./";
+	}
+	separator = filename.find_last_of(".");
+	if (separator == std::string::npos)
+	{
+		std::cout << "Fatal: loadModelFromOBJ(): Expecting filename ending in '.obj'\n";
+		exit(1);
+	}
+	extension = filename.substr(separator, filename.size() - separator);
+	filename = filename.substr(0, separator);
+
+	bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err,
+		(directory + filename + extension).c_str(), directory.c_str(), true);
+
+	for (const auto& m : materials) {
+		Material material;
+		material.m_name = m.name;
+		material.m_color = glm::vec3(1.0f, 0.0f, 0.0f);
+		material.m_reflectivity = m.specular[0];
+		material.m_metalness = m.metallic;
+		material.m_fresnel = m.sheen;
+		material.m_shininess = m.roughness;
+		material.m_emission = m.emission[0];
+		material.m_transparency = m.transmittance[0];
+		model->m_materials.push_back(material);
+	}
+	
+
+	return true;
+}
+
+void renderSimpleModel(const Model* model)
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//float lastIndex = sizeof(model->m_positions) - 1;
+	glBindVertexArray(model->m_vaob);
+	glDrawArrays(GL_TRIANGLES, 0, 240000);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 } // namespace labhelper

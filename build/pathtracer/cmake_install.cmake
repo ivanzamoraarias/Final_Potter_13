@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer
+# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/computer-graphics-labs")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Computer_Graphics_Project")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

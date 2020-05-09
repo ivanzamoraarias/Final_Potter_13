@@ -27,8 +27,14 @@ add_executable ( ${PROJECT_NAME}
     HDRImage.cpp
     embree.h
     embree.cpp
+    embree_copy.h
+    embree_copy.cpp
     material.h
     material.cpp
+    Noise.h
+    Noise.cpp
+    terrainGenerator.h
+    terrainGenerator.cpp
     ${SHADERS}
     )
 

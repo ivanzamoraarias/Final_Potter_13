@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper
+# Install script for directory: C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/computer-graphics-labs")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Computer_Graphics_Project")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/labhelper/imgui/cmake_install.cmake")
+  include("C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/labhelper/imgui/cmake_install.cmake")
 
 endif()
 

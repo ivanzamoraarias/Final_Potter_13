@@ -4,8 +4,9 @@
 #include <map>
 #include <algorithm>
 #include "material.h"
-#include "embree.h"
+#include "embree_copy.h"
 #include "sampling.h"
+#include "Model.h"
 
 using namespace std;
 using namespace glm;
@@ -20,6 +21,8 @@ Environment environment;
 Image rendered_image;
 PointLight point_light;
 DiskLight disk_lights[2];
+
+float current_refr_index;
 
 ///////////////////////////////////////////////////////////////////////////
 // Restart rendering of image
@@ -53,6 +56,9 @@ vec3 Lenvironment(const vec3& wi)
 	if(phi < 0.0f)
 		phi = phi + 2.0f * M_PI;
 	vec2 lookup = vec2(phi / (2.0 * M_PI), theta / M_PI);
+	if (isnan(lookup.x) || isnan(lookup.y)) {
+		int x = 0;
+	}
 	return environment.multiplier * environment.map.sample(lookup.x, lookup.y);
 }
 
@@ -60,6 +66,18 @@ vec3 Lenvironment(const vec3& wi)
 // Calculate the radiance going from one point (r.hitPosition()) in one
 // direction (-r.d), through path tracing.
 ///////////////////////////////////////////////////////////////////////////
+
+ vec3 textureSample(labhelper::Texture t, float u, float v) {
+	 //int x = int(u);
+	 //int y = int(v);
+	 
+	 int x = int(u * t.width) % t.width;
+	 int y = int(v * t.height) % t.height;
+
+	 vec3 c = vec3(t.data[4 * (y * t.width + x) + 0] / 255.0, t.data[4 * (y * t.width + x) + 1] / 255.0, t.data[4 * (y * t.width + x) + 2] / 255.0);
+	 return c;
+ }
+
 vec3 Li(Ray& primary_ray)
 {
 	vec3 L = vec3(0.0f);
@@ -70,20 +88,39 @@ vec3 Li(Ray& primary_ray)
 		
 		// Get Intersection
 		Intersection hit = getIntersection(current_ray);
-
-		// Create Material tree
-		/*
-		Diffuse diffuse(hit.material->m_color);
-		BRDF& mat = diffuse;
-		*/
 		
-		Diffuse diffuse(hit.material->m_color);
-		BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, &diffuse);
+		vec3 diffuse_color;
+		if (hit.material->m_color_texture.valid) {
+			diffuse_color = textureSample(hit.material->m_color_texture, hit.textCoord.x, hit.textCoord.y);
+			//diffuse_color = vec4(hit.material->m_color, hit.material->m_transparency);
+		}
+		else {
+			diffuse_color = vec3(hit.material->m_color);
+		}
+		
+		// check if a ray would change (enter or exit) medium
+		float ni, no;
+		bool isEnteringMaterial = false;
+		vec3 normal = hit.shading_normal;
+		if (dot(current_ray.d, hit.geometry_normal) < 0.0f) {
+			ni = 1.0f;
+			no = 1.5f;
+			isEnteringMaterial = true;
+		}
+		else {
+			ni = 1.5f;
+			no = 1.0f;
+			normal = -hit.shading_normal;
+		}
+
+		Diffuse diffuse(diffuse_color);
+		BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, ni, no, hit.material->m_transparency, &diffuse);
 		BlinnPhongMetal metal(hit.material->m_color, hit.material->m_shininess,
 			hit.material->m_fresnel);
 		LinearBlend metal_blend(hit.material->m_metalness, &metal, &dielectric);
 		LinearBlend reflectivity_blend(hit.material->m_reflectivity, &metal_blend, &diffuse);
 		BRDF& mat = reflectivity_blend;
+
 		
 
 		// Sample light point in disk
@@ -104,7 +141,6 @@ vec3 Li(Ray& primary_ray)
 
 		vec3 diskSample = vec3(diskSampleX * disk_light.radius, 0.0f, diskSampleY * disk_light.radius) + disk_light.position;
 
-
 		// Check if in shadow
 		Ray shadow_ray;
 
@@ -120,7 +156,7 @@ vec3 Li(Ray& primary_ray)
 			vec3 Li = 2 * disk_light.intensity_multiplier * disk_light.color * falloff_factor * dot(-wi, disk_light.normal) * diskArea;
 			Li /= 500.0f;
 
-			L += path_throughput * (mat.f(wi, hit.wo, hit.shading_normal) * Li * std::max(0.0f, dot(wi, hit.shading_normal)));
+			L += path_throughput * (mat.f(wi, hit.wo, normal) * Li * std::max(0.0f, dot(wi, normal)));
 		}
 
 		// Emitted radiance from intersection (need to check)
@@ -129,10 +165,12 @@ vec3 Li(Ray& primary_ray)
 		// Sample an incoming direction (and the brdf and pdf for that direction)
 		vec3 rand_wi = vec3(0.0f);
 		float pdf = 0.0f;
-		vec3 brdf = mat.sample_wi(rand_wi, hit.wo, hit.shading_normal, pdf);
+		
+		vec3 brdf = mat.sample_wi(rand_wi, hit.wo, normal, pdf);
+
 
 		// Calculate cosine term to attenuate incoming light based on incident angle
-		float cos_term = abs(dot(rand_wi, hit.shading_normal));
+		float cos_term = abs(dot(rand_wi, normal));
 
 		// There are case where the pdf value doesnt get changed before the refraction layer is NULL
 		// Therefore, causing NaN errors
@@ -152,7 +190,13 @@ vec3 Li(Ray& primary_ray)
 		// Create next ray on path
 		Ray nextRayInPath;
 
-		nextRayInPath.o = hit.position + (EPSILON * hit.shading_normal);
+		if (isEnteringMaterial && dielectric.isRefracted) {
+			nextRayInPath.o = hit.position - (EPSILON * hit.geometry_normal);
+		}
+		else {
+			nextRayInPath.o = hit.position + (EPSILON * hit.geometry_normal);
+		}
+		
 		nextRayInPath.d = rand_wi;
 
 		if (!intersect(nextRayInPath)) {
@@ -162,51 +206,6 @@ vec3 Li(Ray& primary_ray)
 		current_ray = nextRayInPath;
 
 	}
-
-	/*  Simple ray tracer
-
-	///////////////////////////////////////////////////////////////////
-	// Get the intersection information from the ray
-	///////////////////////////////////////////////////////////////////
-	Intersection hit = getIntersection(current_ray);
-
-	Ray shadow_ray;
-
-	shadow_ray.o = hit.position + EPSILON;
-	shadow_ray.d = normalize(point_light.position - shadow_ray.o);
-
-	if (occluded(shadow_ray)) {
-
-		// Possibly not, since these would be super hard shadows
-		return L;
-	}
-	///////////////////////////////////////////////////////////////////
-	// Create a Material tree for evaluating brdfs and calculating
-	// sample directions.
-	///////////////////////////////////////////////////////////////////
-
-	Diffuse diffuse(hit.material->m_color);
-	BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, &diffuse);
-	BlinnPhongMetal metal(hit.material->m_color, hit.material->m_shininess,
-		hit.material->m_fresnel);
-	LinearBlend metal_blend(hit.material->m_metalness, &metal, &dielectric);
-	LinearBlend reflectivity_blend(hit.material->m_reflectivity, &metal_blend, &diffuse);
-	BRDF& mat = reflectivity_blend;
-
-	///////////////////////////////////////////////////////////////////
-	// Calculate Direct Illumination from light.
-	///////////////////////////////////////////////////////////////////
-	{
-		const float distance_to_light = length(point_light.position - hit.position);
-		const float falloff_factor = 1.0f / (distance_to_light * distance_to_light);
-		vec3 Li = point_light.intensity_multiplier * point_light.color * falloff_factor;
-		vec3 wi = normalize(point_light.position - hit.position);
-		L = mat.f(wi, hit.wo, hit.shading_normal) * Li * std::max(0.0f, dot(wi, hit.shading_normal));
-	}
-	// Return the final outgoing radiance for the primary ray
-	return L;
-
-	*/
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -253,7 +252,10 @@ void tracePaths(const glm::mat4& V, const glm::mat4& P)
 			// Intersect ray with scene
 			if(intersect(primaryRay))
 			{
+				current_refr_index = 1.0f;
+
 				// If it hit something, evaluate the radiance from that point
+
 				vec3 radiance = Li(primaryRay);
 
 				if (isnan(radiance.x)) {
@@ -261,11 +263,12 @@ void tracePaths(const glm::mat4& V, const glm::mat4& P)
 				}
 
 				color = radiance;
+
 			}
 			else
 			{
 				// Otherwise evaluate environment
-				color = Lenvironment(primaryRay.d);
+				color = vec4(Lenvironment(primaryRay.d), 1.0f);
 			}
 			// Accumulate the obtained radiance to the pixels color
 			float n = float(rendered_image.number_of_samples);

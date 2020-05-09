@@ -42,10 +42,15 @@ class BlinnPhong : public BRDF
 public:
 	float shininess;
 	float R0;
+	float refr_index_i;
+	float refr_index_o;
 	BRDF* refraction_layer;
-	BlinnPhong(float _shininess, float _R0, BRDF* _refraction_layer = NULL)
-	    : shininess(_shininess), R0(_R0), refraction_layer(_refraction_layer)
+	float transparency;
+	bool isRefracted;
+	BlinnPhong(float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f, float _transparency = 1.0f, BRDF* _refraction_layer = NULL)
+	    : shininess(_shininess), R0(_R0), refr_index_i(_refr_index_i), refr_index_o(_refr_index_o), transparency(_transparency), refraction_layer(_refraction_layer)
 	{
+		isRefracted = false;
 	}
 	virtual vec3 refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n);
 	virtual vec3 reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n);

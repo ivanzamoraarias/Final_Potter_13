@@ -37,52 +37,46 @@ vec3 Diffuse::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 ///////////////////////////////////////////////////////////////////////////
 vec3 BlinnPhong::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 {
-	if (refraction_layer == NULL) {
-		return vec3(0.0f);
-	}
 
-	// Half angle between wo and wi
-	vec3 wh = normalize(wi + wo);
+	// Half angle between wo and wi	
 
-	// Fresnel term
-	float F = R0 + ((1 - R0) * pow(1.0f - abs(dot(wh, wi)), 5.0f));
 
-	vec3 brdf = (1.0f - F) * refraction_layer->f(wi, wo, n);
+	return vec3(0.1f);
 
-	return brdf;
 	
 }
 vec3 BlinnPhong::reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 {
 	// Half angle between wo and wi
+	float nwi = dot(n, wi);
 
-	vec3 wh = normalize(wi + wo);
+	vec3 wh = normalize((wi + wo));
 
 	// Fresnel term
 	float F = R0 + ((1 - R0) * pow(1.0f - abs(dot(wh, wi)), 5.0f));
 
 	// Microfacet Distributon Function
 	float nwh =  dot(n, wh);
+	float posNWH = (nwh > 0.0f) ? 1.0f : 0.0f;
+	float tanNWH = length(cross(n, wh)) / nwh;
+
 	float D = ((shininess + 2.0) / (2 * PI)) * pow(std::max(0.0f, nwh), shininess);
 
 	// Shadowing/Masking Function
-	float nwi = dot(n, wi);
-
+	
 	if (nwi <= 0.0f) {
 		return vec3(0.0f);
 	}
 
 	float nwo = dot(n, wo);
 	float wowh = dot(wo, wh);
+	float wiwh = dot(wi, wh);
+
 	float G = std::min(1.0f, min(2 * ((nwh * nwo) / wowh), 2 * ((nwh * nwi) / wowh)));
 
-	float brdf = (F * D * G) / (4 * nwo * nwi);
-
-	//return vec3(D);
+	float brdf = (F * D * G) / (4 * abs(nwo) * abs(nwi));
 
 	return vec3(brdf);
-
-
 
 }
 
@@ -104,48 +98,70 @@ vec3 BlinnPhong::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 	vec3 wh = normalize(sin_theta * cos(phi) * tangent +
 		sin_theta * sin(phi) * bitangent +
 		cos_theta * n);
-	if (dot(wo, n) <= 0.0f) return vec3(0.0f);
+
+	// Sample theta and phi from GGX distribution
+	/*vec3 tangent = normalize(perpendicular(n));
+	vec3 bitangent = normalize(cross(tangent, n));
+	float randVar = randf();
+	float theta = atan((shininess * sqrt(randVar / (1.0f - randVar))));
+	float phi = 2.0f * M_PI * randf();
+	vec3 wh = normalize(sin(theta) * cos(phi) * tangent +
+		sin(theta) * sin(phi) * bitangent +
+		cos(theta) * n);*/
+
+
+	// check we are on the upper hemisphere
+	// ask
+	if (dot(wo, n) <= 0.0f) 
+		return vec3(0.0f);
 
 	
-
-	// Russian roulette
-	if (randf() < 0.5f) {
+	if (randf() <= transparency) {
+		
 		wi = reflect(-wo, wh);
 
+		// ask
 		float pwh = (shininess + 1) * (pow(dot(n, wh), shininess)) / (2.0f * M_PI);
 
-		p = pwh / (4 * dot(wo, wh));
+		// jacobian
+		float j = 1.0f / (4 * abs(dot(wo, wh)));
 
-		p = p * 0.5f;
+		p = pwh * j;
+
+		p = p * transparency;
 
 		return reflection_brdf(wi, wo, n);
+
 	}
 	else {
-		if (refraction_layer == NULL) {
-			return vec3(0.0f);
+
+		isRefracted = true;
+
+		p = 1.0f;
+		p = p * (1.0f - transparency);
+
+		// Check for total internal reflection
+		int signNI = (dot(n, wo) < 0.0f) ? -1 : 1;
+		float eta = refr_index_i / refr_index_o;
+		float wowh = dot(wo, wh);
+
+		if ((1.0f - (wowh * wowh)) > 1.0f) {
+			isRefracted = false;
+			wi = reflect(-wo, wh);
+			return reflection_brdf(wi, wo, n);
 		}
 
-		vec3 brdf = refraction_layer->sample_wi(wi, wo, n, p);
+		float sqr = 1.0f + (eta * ((wowh * wowh) - 1.0f));
 
-		p = p * 0.5f;
+		sqr = (sqr < 0.0f) ? 0.0f : sqr;
 
-		float F = R0 + (1.0f - R0) * pow(1.0f - abs(dot(wh, wi)), 5.0f);
+		wi = ((eta * wowh) - (signNI * sqrtf(sqr))) * wh - (eta * wo);
 
-		return (1 - F) * brdf;
+		return vec3(1.0f - transparency)/dot(wo,n);
+		//return refraction_brdf(wi, wo, n);
+
 	}
-	
 
-	/*
-	vec3 tangent = normalize(perpendicular(n));
-	vec3 bitangent = normalize(cross(tangent, n));
-	vec3 sample = cosineSampleHemisphere();
-	wi = normalize(sample.x * tangent + sample.y * bitangent + sample.z * n);
-	if(dot(wi, n) <= 0.0f)
-		p = 0.0f;
-	else
-		p = max(0.0f, dot(n, wi)) / M_PI;
-	return f(wi, wo, n);
-	*/
 }
 
 ///////////////////////////////////////////////////////////////////////////

@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E9216915-65DF-3A27-9B2E-715EA702B853}</ProjectGuid>
+    <ProjectGuid>{6610E3F5-880E-39E3-8430-F71AB37E920C}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -50,22 +50,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">labhelper.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">labhelper</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">labhelper.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">labhelper</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">labhelper.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">labhelper</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -82,10 +82,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -98,7 +98,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -116,10 +116,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -132,7 +132,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -149,10 +149,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLM_ENABLE_EXPERIMENTAL;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glew\include;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\stb-master;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\tinyobjloader-1.0.6;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glew\include;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external_src\imgui-1.51;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -164,10 +164,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/labhelper/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/labhelper/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -175,12 +175,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/labhelper/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/labhelper/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -188,12 +188,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/labhelper/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/labhelper/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -201,32 +201,32 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/labhelper/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindGLEW.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\SelectLibraryConfigurations.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\glm\glm-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\sdl2\sdl2-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\labhelper.h" />
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\labhelper.cpp">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\labhelper.h" />
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\labhelper.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\Model.h" />
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\Model.cpp">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\Model.h" />
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\Model.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MaxSpeed</Optimization>
     </ClCompile>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\imgui_impl_sdl_gl3.h" />
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\labhelper\imgui_impl_sdl_gl3.cpp" />
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.h" />
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\labhelper\imgui_impl_sdl_gl3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\ZERO_CHECK.vcxproj">
-      <Project>{9F4EE5C2-CD0E-37B3-B6F6-2094E4C4956E}</Project>
+    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\ZERO_CHECK.vcxproj">
+      <Project>{E93FC3F0-9BD9-380C-AF5A-ED28F1C96DF1}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\labhelper\imgui\imgui.vcxproj">
-      <Project>{8F7488B5-D71F-370B-A463-C193CC0D2C90}</Project>
+    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\labhelper\imgui\imgui.vcxproj">
+      <Project>{732B7D29-8760-39F1-A66D-28B0C0574481}</Project>
       <Name>imgui</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

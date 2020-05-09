@@ -197,7 +197,7 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
 	                          inverse(transpose(viewMatrix * landingPadModelMatrix)));
 
-	labhelper::render(landingpadModel);
+	//labhelper::render(landingpadModel);
 
 	// Fighter
 	fighterModelMatrix = scale(vec3(5.0f, 5.0f, 5.0f));

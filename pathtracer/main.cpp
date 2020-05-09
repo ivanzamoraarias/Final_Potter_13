@@ -11,6 +11,8 @@
 #include <Model.h>
 #include <string>
 #include "Pathtracer.h"
+#include "terrainGenerator.h"
+#include "embree_copy.h"
 #include "embree.h"
 
 using namespace glm;
@@ -50,6 +52,61 @@ vec3 worldUp(0.0f, 1.0f, 0.0f);
 // Models
 ///////////////////////////////////////////////////////////////////////////////
 vector<pair<labhelper::Model*, mat4>> models;
+
+mat4 terrainModelMatrix;
+labhelper::Model* terrainModel = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Terrain
+///////////////////////////////////////////////////////////////////////////////
+terrainGenerator* terrain = new terrainGenerator(300.0f, 300.0f, 10.0f);
+labhelper::Model* createTerrainModel() {
+	labhelper::Model* model = new labhelper::Model;
+	model->m_name = "terrain";
+	model->m_filename = "terrain.obj";
+	model->m_positions = terrain->getVerticesPosition();
+	model->m_normals = terrain->getNormals();
+	int sizeOfVertices = model->m_positions.size();
+	model->m_texture_coordinates.resize(sizeOfVertices);
+	/*for (int i = 0; i < sizeOfVertices; i++) {
+		std::cout <<"Y: "<<&model->m_positions[0]<<"\n" ;
+	}*/
+
+	labhelper::Mesh m;
+	m.m_material_idx = 0;
+	m.m_name = "terrain_mesh";
+	m.m_number_of_vertices = terrain->vertices.size();
+	m.m_start_index = 0;
+	model->m_meshes.push_back(m);
+
+	labhelper::loadMaterials(model);
+	///////////////////////////////////////////////////////////////////////
+	// Upload to GPU
+	///////////////////////////////////////////////////////////////////////
+	glGenVertexArrays(1, &model->m_vaob);
+	glBindVertexArray(model->m_vaob);
+	glGenBuffers(1, &model->m_positions_bo);
+	glBindBuffer(GL_ARRAY_BUFFER, model->m_positions_bo);
+	glBufferData(GL_ARRAY_BUFFER, model->m_positions.size() * sizeof(glm::vec3), &model->m_positions[0].x,
+		GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+	glEnableVertexAttribArray(0);
+	//glGenBuffers(1, &model->m_normals_bo);
+	//glBindBuffer(GL_ARRAY_BUFFER, model->m_normals_bo);
+	//glBufferData(GL_ARRAY_BUFFER, model->m_normals.size() * sizeof(glm::vec3), &model->m_normals[0].x,
+	//	GL_STATIC_DRAW);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+	//glEnableVertexAttribArray(1);
+	//glGenBuffers(1, &model->m_texture_coordinates_bo);
+	//glBindBuffer(GL_ARRAY_BUFFER, model->m_texture_coordinates_bo);
+	//glBufferData(GL_ARRAY_BUFFER, model->m_texture_coordinates.size() * sizeof(glm::vec2),
+	//	&model->m_texture_coordinates[0].x, GL_STATIC_DRAW);
+	//glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
+	//glEnableVertexAttribArray(2);
+	return model;
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Load shaders, environment maps, models and so on
@@ -106,13 +163,20 @@ void initialize()
 	// Load .obj models to scene
 	///////////////////////////////////////////////////////////////////////////
 	
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj"), translate(vec3(0.0f, 0.0f, 0.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ffxiii/FF13_360_CHARACTER_Claire_Farron_Default.obj"), scale(vec3(15.0f, 15.0f, 15.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ffxiii/Lightning.obj"), translate(vec3(15.0f, 0.0f, 0.0f)) * scale(vec3(15.0f, 15.0f, 15.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj"), translate(vec3(15.0f, 0.0f, 0.0f)) * scale(vec3(1.0f, 1.0f, 1.0f))));
 
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
-	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(0.0f, 8.0f, 0.0f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(0.0f, 8.0f, 0.0f))));
+
+	//terrainModel = createTerrainModel();
+
+	//models.push_back(make_pair(terrainModel, scale(vec3(20.0f, 1.0f, 20.0f))));
+	
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(-15.0f, 5.0f, 0.0f))));
 	///////////////////////////////////////////////////////////////////////////
 	// Add models to pathtracer scene
@@ -395,7 +459,7 @@ void gui()
 			ImGui::SliderFloat("Reflectivity", &material.m_reflectivity, 0.0f, 1.0f);
 			ImGui::SliderFloat("Metalness", &material.m_metalness, 0.0f, 1.0f);
 			ImGui::SliderFloat("Fresnel", &material.m_fresnel, 0.0f, 1.0f);
-			ImGui::SliderFloat("shininess", &material.m_shininess, 0.0f, 25000.0f);
+			ImGui::SliderFloat("shininess", &material.m_shininess, 0.0f, 2500.0f);
 			ImGui::SliderFloat("Emission", &material.m_emission, 0.0f, 10.0f);
 			ImGui::SliderFloat("Transparency", &material.m_transparency, 0.0f, 1.0f);
 

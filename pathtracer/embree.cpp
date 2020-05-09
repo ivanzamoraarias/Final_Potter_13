@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 
-
+/*
 using namespace std;
 using namespace glm;
 
@@ -127,3 +127,5 @@ bool occluded(Ray& r)
 	return r.geomID != RTC_INVALID_GEOMETRY_ID;
 }
 } // namespace pathtracer
+
+*/

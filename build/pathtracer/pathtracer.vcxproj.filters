@@ -1,62 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\main.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\Pathtracer.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Pathtracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\sampling.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\sampling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\HDRImage.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\HDRImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\embree.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\material.cpp">
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree_copy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Noise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\terrainGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\Pathtracer.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Pathtracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\sampling.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\sampling.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\HDRImage.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\HDRImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\embree.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\material.h">
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\embree_copy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\Noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\terrainGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\simple.frag">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\simple.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\simple.vert">
+    <None Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\simple.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{90B96F73-88C2-35B3-85A5-62CC0DAEE4C2}</UniqueIdentifier>
+      <UniqueIdentifier>{AD87928B-849E-33D0-AFD8-A7E6F3698831}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
-      <UniqueIdentifier>{CA178F9E-94B5-3828-A4CC-F5E9C4F4BD8C}</UniqueIdentifier>
+      <UniqueIdentifier>{7629E233-3967-30F9-9987-B78CAA67BA01}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{CDB16B22-E58D-33E5-8C44-5085E9F319DF}</UniqueIdentifier>
+      <UniqueIdentifier>{5624EED1-74D6-3DAD-9801-A4B9029D8060}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

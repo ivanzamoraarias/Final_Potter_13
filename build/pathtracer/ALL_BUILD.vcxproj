@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{89094BE5-B173-3376-B44B-EC06BE638055}</ProjectGuid>
+    <ProjectGuid>{53B492CB-5F6F-3397-9B61-3CE999E8C8DF}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -66,7 +66,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -76,7 +76,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -85,10 +85,10 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/pathtracer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/pathtracer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -96,12 +96,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/pathtracer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/pathtracer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -109,12 +109,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs -BC:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/build/pathtracer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project -BC:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build --check-stamp-file C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/build/pathtracer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -122,22 +122,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/7mo/SP2/computer_graphics/labs/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/ricky/Documents/Chalmers/SP4/AdvGraphics/Computer_Graphics_Project/pathtracer/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\VSUserTemplate.user;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPCheckVersion.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.c;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\CMakeFiles\FindOpenMP\OpenMPTryFlag.cpp;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config-version.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\external\embree2\embree-config.cmake;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\pathtracer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\pathtracer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\ZERO_CHECK.vcxproj">
-      <Project>{9F4EE5C2-CD0E-37B3-B6F6-2094E4C4956E}</Project>
+    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\ZERO_CHECK.vcxproj">
+      <Project>{E93FC3F0-9BD9-380C-AF5A-ED28F1C96DF1}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\7mo\SP2\computer_graphics\labs\build\pathtracer\pathtracer.vcxproj">
-      <Project>{733FEE25-22C3-3B36-8690-554F743E0FF2}</Project>
+    <ProjectReference Include="C:\Users\ricky\Documents\Chalmers\SP4\AdvGraphics\Computer_Graphics_Project\build\pathtracer\pathtracer.vcxproj">
+      <Project>{6DB88897-6D07-338E-AB70-88A509ED2265}</Project>
       <Name>pathtracer</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
