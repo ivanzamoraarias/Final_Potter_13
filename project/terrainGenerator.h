@@ -18,6 +18,7 @@ private:
 	float** zValues;
 
 	float** getZvalues();
+	void setHeighWithNoise();
 
 
 

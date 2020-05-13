@@ -1,4 +1,5 @@
 #include "terrainGenerator.h"
+#include "Noise.h"
 
 terrainGenerator::terrainGenerator(float w, float h, float scl)
 {
@@ -26,10 +27,10 @@ std::vector<glm::vec3> terrainGenerator::getVerticesPosition()
 
 std::vector<glm::vec3> terrainGenerator::getVerticesPositionTest()
 {
-	vertices = { {0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f} };
-	return vertices; 
+	/*vertices = { {0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f} };
+	return vertices; */
 
-	int m_meshResolution = 200;
+	int m_meshResolution = 20;
 
 	int size = m_meshResolution * m_meshResolution * 2 * 3 * 3;
 	float* positions = new float[size]();
@@ -42,6 +43,9 @@ std::vector<glm::vec3> terrainGenerator::getVerticesPositionTest()
 	float z1 = 0;
 	float z2 = 0;
 	int index = 0;
+
+	
+
 	//For each row
 	for (int r = 0; r < m_meshResolution; r++) {
 		//For each column
@@ -51,6 +55,9 @@ std::vector<glm::vec3> terrainGenerator::getVerticesPositionTest()
 			z1 = startZ - r * this->scl;
 			z2 = startZ - (r + 1) * this->scl;
 			//Generate one triangle
+			//float y1 = noise->getNoise(x1, 0, z1);
+			//float y2 = noise->getNoise(x2, 0, z2);
+
 			vertices.push_back(glm::vec3(x1, 0, z1));
 			vertices.push_back(glm::vec3(x2, 0, z2));
 			vertices.push_back(glm::vec3(x2, 0, z1));
@@ -68,9 +75,10 @@ std::vector<glm::vec3> terrainGenerator::getVerticesPositionTest()
 
 void terrainGenerator::createTerrain()
 {
-	this->getZvalues();
+	//this->getZvalues();
 
 	this->getVerticesPositionTest();
+	this->setHeighWithNoise();
 
 	/*vertices.push_back(glm::vec3(1,1,0));
 	vertices.push_back(glm::vec3(4,2,0));
@@ -138,5 +146,29 @@ float** terrainGenerator::getZvalues()
 	}
 	float a = zValues[0][0];
 	return zValues;
+}
+
+void terrainGenerator::setHeighWithNoise()
+{
+	Noise* noise = new Noise(867);
+	
+	for (int i = 0; i < 2000; i++) {
+		
+		float newZ = 100 * noise->getNoise(
+			this->vertices[i].x, 
+			0.8, 
+			this->vertices[i].z
+		);
+		newZ = newZ - floor(newZ);
+
+		for (int j = 0; j < 2000; j++) {
+			if (this->vertices[j].x == this->vertices[i].x && 
+				this->vertices[j].z == this->vertices[i].z) {
+				this->vertices[j].y = floor(255 * newZ);
+			}
+		}
+	};
+
+	
 }
 

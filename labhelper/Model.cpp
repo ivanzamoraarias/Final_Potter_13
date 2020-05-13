@@ -555,7 +555,7 @@ void renderSimpleModel(const Model* model)
 	//float lastIndex = sizeof(model->m_positions) - 1;
 	glBindVertexArray(model->m_vaob);
 	
-	glDrawArrays(GL_TRIANGLES, 0, 300);
+	glDrawArrays(GL_TRIANGLES, 0, 240000);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 } // namespace labhelper

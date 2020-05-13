@@ -27,6 +27,7 @@ using std::max;
 
 #include "terrainGenerator.h"
 #include "heightfield.h"
+#include <iostream>
 
 ///////////////////////////////////////////////////////////////////////////////
 // Various globals
@@ -105,12 +106,12 @@ labhelper::Model* createTerrainModel() {
 
 	model->m_positions = terrain->getVerticesPosition();
 	model->m_normals = terrain->getNormals();
-	int sizeOfVertices = sizeof(model->m_positions);
+	int sizeOfVertices = model->m_positions.size();
 	model->m_texture_coordinates.resize(sizeOfVertices);
 
-	for (int i = 0; i < sizeOfVertices; i++) {
-		model->m_texture_coordinates[i] = glm::vec2(0.0f);
-	}
+	/*for (int i = 0; i < sizeOfVertices; i++) {
+		std::cout <<"Y: "<<&model->m_positions[0]<<"\n" ;
+	}*/
 
 
 	labhelper::loadMaterials(model);
@@ -215,8 +216,8 @@ void initGL()
 
 
 	glEnable(GL_DEPTH_TEST); // enable Z-buffering
-	glEnable(GL_CULL_FACE);  // enables backface culling
-
+	//glEnable(GL_CULL_FACE);  // enables backface culling
+	glDisable(GL_CULL_FACE);
 
 }
 
@@ -284,7 +285,7 @@ void drawScene(GLuint currentShaderProgram,
 	labhelper::setUniformSlow(currentShaderProgram, "normalMatrix",
 	                          inverse(transpose(viewMatrix * fighterModelMatrix)));
 
-	//labhelper::render(fighterModel);
+	labhelper::render(fighterModel);
 
 
 
@@ -301,7 +302,7 @@ void drawScene(GLuint currentShaderProgram,
 
 	glUseProgram(terrainProgram);
 	//terrainModelMatrix = translate(vec3(0.0f, -50.0f, 0.0f)) * rotate(1.57f, vec3(1, 0, 0)) * scale(vec3(5, 5, 5));
-	//terrainModelMatrix = translate(vec3(0.0f,0.0f,0.0f));
+	terrainModelMatrix = scale(vec3(5.f,1.0f,5.f));
 	labhelper::setUniformSlow(
 		terrainProgram,
 		"modelViewProjectionMatrix",
