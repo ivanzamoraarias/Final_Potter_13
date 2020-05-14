@@ -42,15 +42,10 @@ class BlinnPhong : public BRDF
 public:
 	float shininess;
 	float R0;
-	float refr_index_i;
-	float refr_index_o;
 	BRDF* refraction_layer;
-	float transparency;
-	bool isRefracted;
-	BlinnPhong(float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f, float _transparency = 1.0f, BRDF* _refraction_layer = NULL)
-	    : shininess(_shininess), R0(_R0), refr_index_i(_refr_index_i), refr_index_o(_refr_index_o), transparency(_transparency), refraction_layer(_refraction_layer)
+	BlinnPhong(float _shininess, float _R0, BRDF* _refraction_layer = NULL)
+	    : shininess(_shininess), R0(_R0), refraction_layer(_refraction_layer)
 	{
-		isRefracted = false;
 	}
 	virtual vec3 refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n);
 	virtual vec3 reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n);
@@ -84,6 +79,38 @@ public:
 	LinearBlend(float _w, BRDF* a, BRDF* b) : w(_w), bsdf0(a), bsdf1(b){};
 	virtual vec3 f(const vec3& wi, const vec3& wo, const vec3& n) override;
 	virtual vec3 sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p) override;
+};
+
+class BTDF : public BRDF
+{
+public:
+	float shininess;
+	float R0;
+	float refr_index_i;
+	float refr_index_o;
+	BRDF* refraction_layer;
+	float transparency;
+	bool isRefracted;
+	BTDF(float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f, float _transparency = 1.0f, BRDF* _refraction_layer = NULL)
+		: shininess(_shininess), R0(_R0), refr_index_i(_refr_index_i), refr_index_o(_refr_index_o), transparency(_transparency), refraction_layer(_refraction_layer)
+	{
+		isRefracted = false;
+	}
+	virtual vec3 refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n);
+	virtual vec3 reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n);
+	virtual vec3 f(const vec3& wi, const vec3& wo, const vec3& n) override;
+	virtual vec3 sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p) override;
+};
+
+
+class Distributions
+{
+public:
+	static float FresnelExact(const vec3& wi, const vec3& wh, const float refr_idx_i, const float refr_idx_o);
+	static float FresnelSchlick(const vec3& wi, const vec3& wh, const float R0);
+	static float GGX_D(const vec3& n, const vec3& wh, const float shininess);
+	static float GGXSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess);
+	static float GGXSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess);
 };
 
 } // namespace pathtracer

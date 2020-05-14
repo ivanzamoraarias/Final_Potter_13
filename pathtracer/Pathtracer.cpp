@@ -102,25 +102,28 @@ vec3 Li(Ray& primary_ray)
 		float ni, no;
 		bool isEnteringMaterial = false;
 		vec3 normal = hit.shading_normal;
-		if (dot(current_ray.d, hit.geometry_normal) < 0.0f) {
+		if (dot(current_ray.d, hit.shading_normal) < 0.0f) {
 			ni = 1.0f;
-			no = 1.5f;
+			no = 1.001f;
 			isEnteringMaterial = true;
 		}
 		else {
-			ni = 1.5f;
+			ni = 1.001f;
 			no = 1.0f;
-			normal = -hit.shading_normal;
+			normal = -normal;
 		}
 
 		Diffuse diffuse(diffuse_color);
-		BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, ni, no, hit.material->m_transparency, &diffuse);
+		//BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, &diffuse);
+		BTDF transparent(0.005f, hit.material->m_fresnel, ni, no, hit.material->m_transparency, &diffuse);
 		BlinnPhongMetal metal(hit.material->m_color, hit.material->m_shininess,
 			hit.material->m_fresnel);
-		LinearBlend metal_blend(hit.material->m_metalness, &metal, &dielectric);
+		LinearBlend metal_blend(hit.material->m_metalness, &metal, &transparent);
 		LinearBlend reflectivity_blend(hit.material->m_reflectivity, &metal_blend, &diffuse);
 		BRDF& mat = reflectivity_blend;
-
+		
+		//LinearBlend transparency_blend(hit.material->m_transparency, &reflectivity_blend, &transparent);
+		//BRDF& mat = transparency_blend;
 		
 
 		// Sample light point in disk
@@ -190,13 +193,14 @@ vec3 Li(Ray& primary_ray)
 		// Create next ray on path
 		Ray nextRayInPath;
 
-		if (isEnteringMaterial && dielectric.isRefracted) {
+		if (isEnteringMaterial && transparent.isRefracted) {
 			nextRayInPath.o = hit.position - (EPSILON * hit.geometry_normal);
 		}
 		else {
 			nextRayInPath.o = hit.position + (EPSILON * hit.geometry_normal);
 		}
 		
+		//nextRayInPath.o = hit.position + (EPSILON * hit.geometry_normal);
 		nextRayInPath.d = rand_wi;
 
 		if (!intersect(nextRayInPath)) {

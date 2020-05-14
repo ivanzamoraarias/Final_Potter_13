@@ -10,8 +10,10 @@
 #include <glm/gtx/transform.hpp>
 #include <Model.h>
 #include <string>
+#include <algorithm>
 #include "Pathtracer.h"
 #include "terrainGenerator.h"
+#include "ParticleSystem.h"
 #include "embree_copy.h"
 #include "embree.h"
 
@@ -44,8 +46,8 @@ uint32_t pathtracer_result_txt_id;
 ///////////////////////////////////////////////////////////////////////////////
 // Camera parameters.
 ///////////////////////////////////////////////////////////////////////////////
-vec3 cameraPosition(-30.0f, 10.0f, 30.0f);
-vec3 cameraDirection = normalize(vec3(0.0f, 10.0f, 0.0f) - cameraPosition);
+vec3 cameraPosition(0.0f, 0.0f, 30.0f);
+vec3 cameraDirection = normalize(vec3(0.0f, 0.0f, 0.0f) - cameraPosition);
 vec3 worldUp(0.0f, 1.0f, 0.0f);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,6 +57,13 @@ vector<pair<labhelper::Model*, mat4>> models;
 
 mat4 terrainModelMatrix;
 labhelper::Model* terrainModel = nullptr;
+
+// Clouds
+ParticleSystem particle_system = ParticleSystem(100000);
+std::vector<glm::vec4> dataParticles;
+
+mat4 cloudsModelMatrix;
+GLuint vertexArrayObject, particleBuffer, particleTexture;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Terrain
@@ -107,6 +116,71 @@ labhelper::Model* createTerrainModel() {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Clouds
+///////////////////////////////////////////////////////////////////////////////
+
+void loadParticleIntoOpenGl()
+{
+	int w, h, comp;
+	unsigned char* image = stbi_load("../scenes/cloudImageTest.png", &w, &h, &comp, STBI_rgb_alpha);
+	glGenTextures(0, &particleTexture);
+	glBindTexture(GL_TEXTURE_2D, particleTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	free(image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	///////////////////////////////////////////////////////////////////////////
+	// Create the vertex array object
+	///////////////////////////////////////////////////////////////////////////
+	// Create a handle for the vertex array object
+	glGenVertexArrays(1, &vertexArrayObject);
+	// Set it as current, i.e., related calls will affect this object
+	glBindVertexArray(vertexArrayObject);
+	/////////////////////////
+	/// Buffer
+	////////////
+	glGenBuffers(1, &particleBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, particleBuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4) * 100000, nullptr, GL_STATIC_DRAW);
+	//glBufferSubData(GL_ARRAY_BUFFER, 64 ,sizeof(data), &data);
+	glVertexAttribPointer(0, 4, GL_FLOAT, false /*normalized*/, 0 /*stride*/, 0 /*offset*/);
+	glEnableVertexAttribArray(0);
+}
+
+void drawParticles(const mat4& viewMatrix, const mat4& projMatrix) {
+	/* Code for extracting data goes here */
+	dataParticles.clear();
+	dataParticles.reserve(int(particle_system.particles.size() * 1.5) + 1);
+	// populate with vector 4 
+	for (Particle p : particle_system.particles) {
+		vec3 pos = vec3(viewMatrix * vec4(p.pos, 1.0f));
+		dataParticles.push_back(vec4(pos, p.lifetime));
+	}
+	// sort particles with sort from c++ standard library
+	std::sort(dataParticles.begin(), std::next(dataParticles.begin(), dataParticles.size()),
+		[](const vec4& lhs, const vec4& rhs) { return lhs.z < rhs.z; });
+	glBindVertexArray(vertexArrayObject);
+	glBindBuffer(GL_ARRAY_BUFFER, particleBuffer);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, dataParticles.size() * sizeof(vec4), dataParticles.data());
+	// Particles
+	/*glUseProgram(particleProgram);
+	labhelper::setUniformSlow(particleProgram, "screen_x", float(windowWidth));
+	labhelper::setUniformSlow(particleProgram, "screen_y", float(windowHeight));
+	labhelper::setUniformSlow(particleProgram, "P",
+		projMatrix);*/
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, particleTexture);
+	glEnable(GL_PROGRAM_POINT_SIZE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDrawArrays(GL_POINTS, 0, dataParticles.size());
+	glDisable(GL_BLEND);
+	particle_system.process_particles(deltaTime, cloudsModelMatrix);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Load shaders, environment maps, models and so on
@@ -135,19 +209,19 @@ void initialize()
 	
 	// Point Light
 	
-	pathtracer::point_light.intensity_multiplier = 2500.0f;
+	pathtracer::point_light.intensity_multiplier = 0.0f;
 	pathtracer::point_light.color = vec3(1.f, 1.f, 1.f);
 	pathtracer::point_light.position = vec3(10.0f, 40.0f, 10.0f);
 	
 
 	// Disk Light
-	pathtracer::disk_lights[0].intensity_multiplier = 2500.0f;
+	pathtracer::disk_lights[0].intensity_multiplier = 1000.0f;
 	pathtracer::disk_lights[0].color = vec3(1.f, 1.f, 1.f);
-	pathtracer::disk_lights[0].position = vec3(0.0f, 30.0f, 30.0f);
-	pathtracer::disk_lights[0].radius = 10.0f;
+	pathtracer::disk_lights[0].position = vec3(0.0f, 5.0f, 0.0f);
+	pathtracer::disk_lights[0].radius = 3.0f;
 	pathtracer::disk_lights[0].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[0].position);
 
-	pathtracer::disk_lights[1].intensity_multiplier = 2500.0f;
+	pathtracer::disk_lights[1].intensity_multiplier = 0.0f;
 	pathtracer::disk_lights[1].color = vec3(1.f, 1.f, 1.f);
 	pathtracer::disk_lights[1].position = vec3(-30.0f, 30.0f, 0.0f);
 	pathtracer::disk_lights[1].radius = 10.0f;
@@ -170,14 +244,28 @@ void initialize()
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
-	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(0.0f, 8.0f, 0.0f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ground_plane.obj"), mat4(1.0f)));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/Cube.obj"), translate(vec3(0.f, 2.f, 0.f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/Cornell.obj"), scale(vec3(2.0f, 2.0f, 2.0f))));
 
 	//terrainModel = createTerrainModel();
 
 	//models.push_back(make_pair(terrainModel, scale(vec3(20.0f, 1.0f, 20.0f))));
 	
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), translate(vec3(-15.0f, 5.0f, 0.0f))));
+
+	/*int x = 0;
+
+	while (x < 20) {
+		particle_system.process_particles(deltaTime, cloudsModelMatrix);
+		x++;
+	}
+
+	for (Particle p : particle_system.particles) {
+		models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/sphere.obj"), translate(p.pos)));
+	}*/
+
 	///////////////////////////////////////////////////////////////////////////
 	// Add models to pathtracer scene
 	///////////////////////////////////////////////////////////////////////////
@@ -306,7 +394,7 @@ bool handleEvents(void)
 		// check keyboard state (which keys are still pressed)
 		const uint8_t* state = SDL_GetKeyboardState(nullptr);
 		vec3 cameraRight = cross(cameraDirection, worldUp);
-		const float speed = 30.f;
+		const float speed = 10.f;
 		if(state[SDL_SCANCODE_W])
 		{
 			cameraPosition += deltaTime * speed * cameraDirection;
