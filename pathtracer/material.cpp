@@ -181,13 +181,16 @@ vec3 LinearBlend::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 ///////////////////////////////////////////////////////////////////////////
 vec3 BTDF::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 {
+	float eta_i = refr_index_o;
+	float eta_o = refr_index_i;
+	
 	// Half angle between wo and wi	
-	vec3 wh = -((refr_index_i * wi) + (refr_index_o * wo));
+	vec3 wh = -(eta_i * wi + eta_o * wo);
 	wh = normalize(wh);
 
 	// Fresnel
 	float F = Distributions::FresnelSchlick(wi, wh, R0);
-	//float F = Distributions::FresnelExact(wi, wh, refr_index_i, refr_index_o);
+	//float F = Distributions::FresnelExact(wi, wh, eta_i, eta_o);
 
 	// Microfacet distribution
 	float D = Distributions::GGX_D(n, wh, shininess);
@@ -199,12 +202,12 @@ vec3 BTDF::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 	float wiwh = dot(wi, wh);
 	float wowh = dot(wo, wh);
 
-	float numerator = abs(wiwh) * abs(wowh) * (refr_index_o * refr_index_o) * (1.0f - F) * G * D;
-	float denominator = abs(dot(n, wi)) * abs(dot(n, wo)) * pow((refr_index_i * wiwh) + (refr_index_o * wowh), 2.0f);
-	float brdf = numerator / denominator;
+	float frac = abs(wiwh) * abs(wowh) / (abs(dot(n, wo)) * abs(dot(n, wi)));
+	float numerator = (eta_o * eta_o) * (1.0f - F) * G * D;
+	float denominator = pow((eta_i * wiwh) + (eta_o * wowh), 2.0f);
+	float brdf = frac *numerator / denominator;
 
 	return vec3(brdf);
-
 
 }
 vec3 BTDF::reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n)
@@ -250,7 +253,7 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 	float phi = 2.0f * M_PI * randf();
 
 	float r = randf();
-	float cos_theta = sqrt(max(0.0f, (1.0f - r) / ((((shininess * shininess) - 1.0f) * r) + 1.0f)));
+	float cos_theta = sqrt((1.0f - r) / ((((shininess * shininess) - 1.0f) * r) + 1.0f));
 	float sin_theta = sqrt(max(0.0f, 1.0f - (cos_theta * cos_theta)));
 
 	vec3 wh = normalize(sin_theta * cos(phi) * tangent +
@@ -260,8 +263,8 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 
 	// Fresnel
 	float F = Distributions::FresnelSchlick(wo, wh, R0);
-	
 
+	////Total internal reflection
 	float eta = refr_index_i / refr_index_o;
 	float cosX = dot(n, -wo);
 	float sinX = (eta * eta) * (1.0f - (cosX * cosX));
@@ -269,11 +272,11 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 		F = 1.0f;
 	}
 	
-	/*float eta = refr_index_i / refr_index_o;
-	float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);*/
+	///*float eta = refr_index_i / refr_index_o;
+	//float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);*/
 
-	float pwh = Distributions::GGX_D(n, wh, shininess);
-	pwh *= abs(dot(n, wh));
+	float D = Distributions::GGX_D(n, wh, shininess);
+	float pwh = D * abs(dot(n, wh));
 
 	// Decide based on Fresnel
 	if (randf() <= F) {
@@ -287,16 +290,14 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 		p = p * F;
 
 		// BRDF
-		return reflection_brdf(wi, wo, n);
+		vec3 brdf = reflection_brdf(wi, wo, n);
+		 
+		return brdf;
 
 	}
 	else {
-
-		isRefracted = true;
-
 		// Calculate transmission vector
 		int signNI = (dot(n, wo) < 0.0f) ? -1 : 1;
-
 
 		float wowh = dot(wo, wh);
 		float sqr = 1.0f + (eta * eta) * ((wowh * wowh) - 1.0f);
@@ -304,17 +305,20 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 			return vec3(0.0f);
 		}
 		wi = (eta * wowh - (signNI * sqrt(sqr))) * wh - eta * wo;
+		isRefracted = true;
 
 		// PDF
-		
-		float j = ((refr_index_o * refr_index_o) * abs(dot(wo, wh))) / pow(refr_index_i * dot(wi, wh) + refr_index_o * dot(wo, wh), 2.0f);  // jacobian
+		vec3 ht = -(refr_index_o * wo + refr_index_i * wi);
+		ht = normalize(ht);
+
+		float j = ((refr_index_o * refr_index_o) * abs(dot(wo, ht))) / pow(refr_index_i * dot(wi, ht) + refr_index_o * dot(wo, ht), 2.0f);  // jacobian
 		p = pwh * j;
-		p = 1.0f * (1.0f - F);
+		p = p * (1.0f - F);
 
 		// BRDF
-		vec3 brdf = vec3(1.0f - F) / dot(wo, n);
-		//vec3 brdf = refraction_brdf(wi, wo, n);
+		vec3 brdf = refraction_brdf(wi, wo, n);
 		return brdf;
+
 	}
 
 }
@@ -337,13 +341,11 @@ float Distributions::FresnelExact(const vec3& wi, const vec3& wh, const float re
 	float F1 = pow(g - c, 2.0f) / (2 * pow(g + c, 2.0f));
 	float F2 = 1.0f + pow(c * (g + c) - 1.0f, 2.0f) / pow(c * (g - c) + 1.0f, 2.0f);
 	float F = F1 * F2;
-
 	return F;
 }
 
 float Distributions::FresnelSchlick(const vec3& wi, const vec3& wh, const float R0) {
 	float F = R0 + ((1 - R0) * pow(1.0f - abs(dot(wh, wi)), 5.0f));
-
 	return F;
 }
 
@@ -352,22 +354,25 @@ float Distributions::GGX_D(const vec3& n, const vec3& wh, const float shininess)
 	int posFuncNWH = nwh > 0 ? 1 : 0;
 
 	float pwr = ((nwh * nwh) * ((shininess * shininess) - 1.0f)) + 1.0f;
-
-	if (pwr == 0.0f) return 0.0f;
+	if (pwr == 0.0f) {
+		return 0.0f;
+	}
 
 	float D = (shininess * shininess * posFuncNWH) / (M_PI * pwr * pwr);
-
 	return D;
 }
 
 float Distributions::GGXSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess) {
-	float v_m = dot(v, wh);
-	float v_n = dot(v, n);
-	if (v_n != 0 && v_m / v_n > 0) {
-		float tan_v = sqrt(max(0.f, 1 - v_n * v_n)) / v_n;
-		return 2.f / (1.f + sqrt(1.f + shininess * shininess * tan_v * tan_v));
+	float vwh = dot(v, wh);
+	float nv = dot(v, n);
+	if (nv != 0.0f && vwh / nv > 0) {
+		float tan_v = (1 - nv * nv) / (nv * nv);
+		float G1 = 2.0f / (1.0f + sqrt(1.0f + (shininess * shininess * tan_v)));
+		return G1;
 	}
-	else return 0.f;
+	else {
+		return 0.0f;
+	}
 }
 
 float Distributions::GGXSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess) {
@@ -376,7 +381,6 @@ float Distributions::GGXSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, 
 
 	// Bidirectional G
 	float G = Gi * Go;
-
 	return G;
 }
 

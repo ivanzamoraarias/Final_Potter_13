@@ -1,9 +1,9 @@
 # Exported by Chalmers Graphics Group
-newmtl wire_028028177
-Kd 0.99999 0.99999 1
+newmtl Material
+Kd 0.8 0.8 0.8
 Ks 1 1 1
 Pm 0
 Ps 0
 Pr 0
 Ke 0 0 0
-Tf 1 1 1
+Tf 0 0 0
