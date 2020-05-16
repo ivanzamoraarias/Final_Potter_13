@@ -58,6 +58,14 @@ vector<pair<labhelper::Model*, mat4>> models;
 mat4 terrainModelMatrix;
 labhelper::Model* terrainModel = nullptr;
 
+// Clouds
+ParticleSystem particle_system = ParticleSystem(100000);
+std::vector<glm::vec4> dataParticles;
+mat4 ardillaModelMatrix;
+labhelper::Model* ardillaModel = nullptr;
+mat4 cloudsModelMatrix(1.0f);
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Terrain
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,7 +116,24 @@ labhelper::Model* createTerrainModel() {
 	return model;
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+// Clouds
+///////////////////////////////////////////////////////////////////////////////
+float cloudDeltaTime = 0.0f;
+void drawCloud(const mat4& viewMatrix, const mat4& projMatrix) {
+	dataParticles.clear();
+	dataParticles.reserve(int(particle_system.particles.size() * 1.5) + 1);
+	for (Particle p : particle_system.particles) {
+		vec3 pos = vec3(viewMatrix * vec4(p.pos, 1.0f));
+		dataParticles.push_back(vec4(pos, p.lifetime));
+	}
+	// sort particles with sort from c++ standard library
+	std::sort(dataParticles.begin(), std::next(dataParticles.begin(), dataParticles.size()),
+		[](const vec4& lhs, const vec4& rhs) { return lhs.z < rhs.z; });
+	
+	particle_system.process_particles(cloudDeltaTime, cloudsModelMatrix);
+	cloudDeltaTime += 0.2f;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -183,7 +208,25 @@ void initialize()
 	//terrainModel = createTerrainModel();
 
 	//models.push_back(make_pair(terrainModel, scale(vec3(20.0f, 1.0f, 20.0f))));
+
+	ardillaModel = labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj");
+	mat4 cloudViewMatrix = lookAt(cameraPosition, cameraPosition + cameraDirection, worldUp);
 	
+	int cloudUpdates = 10;
+	for (int i = 0; i < cloudUpdates; i++) {
+		drawCloud(cloudViewMatrix, mat4(1.0f));
+	}
+
+	srand(time(NULL));
+	for (vec3 item : dataParticles) {
+		float randScale = ((double)rand() / (RAND_MAX)) + 1;
+		mat4 sclateMatrix = scale(vec3(2 * randScale, 2 * randScale, 2 * randScale));
+		mat4 modelMatrix = translate(item) * sclateMatrix;
+		models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj"), modelMatrix));
+	}
+	
+	
+
 
 	///////////////////////////////////////////////////////////////////////////
 	// Add models to pathtracer scene
@@ -238,6 +281,9 @@ void display(void)
 	                              float(pathtracer::rendered_image.width)
 	                                  / float(pathtracer::rendered_image.height),
 	                              0.1f, 100.0f);
+
+	
+
 	pathtracer::tracePaths(viewMatrix, projMatrix);
 
 	///////////////////////////////////////////////////////////////////////////
