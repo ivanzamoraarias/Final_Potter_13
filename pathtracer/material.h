@@ -111,6 +111,11 @@ public:
 	static float GGX_D(const vec3& n, const vec3& wh, const float shininess);
 	static float GGXSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess);
 	static float GGXSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess);
+	static vec3 GGX_sample_wh(const vec3& n, const float shininess);
+	static float Beckmann_D(const vec3& n, const vec3& wh, const float shininess);
+	static float BeckmannSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess);
+	static float BeckmannSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess);
+	static vec3 Beckmann_sample_wh(const vec3& n, const float shininess);
 };
 
 } // namespace pathtracer

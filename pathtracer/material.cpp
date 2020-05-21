@@ -189,14 +189,18 @@ vec3 BTDF::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 	wh = normalize(wh);
 
 	// Fresnel
-	float F = Distributions::FresnelSchlick(wi, wh, R0);
-	//float F = Distributions::FresnelExact(wi, wh, eta_i, eta_o);
+	//float F = Distributions::FresnelSchlick(wi, wh, R0);
+	float F = Distributions::FresnelExact(wi, wh, eta_i, eta_o);
 
+	//float beckman_shininess = 1.2f - (0.2f * sqrt(abs(dot(wi, n))));
+	
 	// Microfacet distribution
 	float D = Distributions::GGX_D(n, wh, shininess);
+	//float D = Distributions::Beckmann_D(n, wh, shininess * beckman_shininess);
 
 	// Shadowing-masking term
 	float G = Distributions::GGXSmith_G(wi, wo, wh, n, shininess);
+	//float G = Distributions::BeckmannSmith_G(wi, wo, wh, n, shininess * beckman_shininess);
 
 	// BRDF
 	float wiwh = dot(wi, wh);
@@ -219,17 +223,21 @@ vec3 BTDF::reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 	vec3 wh = signWH * (wi + wo);
 	wh = normalize(wh);
 
-	if (dot(wi, n) <= 0.f || !sameHemisphere(wi, wo, n)) return vec3(0.0f);
+	//if (dot(wi, n) <= 0.f) return vec3(0.0f);
 
 	// Fresnel
-	float F = Distributions::FresnelSchlick(wi, wh, R0);
-	//float F = Distributions::FresnelExact(wi, wh, refr_index_i, refr_index_o);
+	//float F = Distributions::FresnelSchlick(wi, wh, R0);
+	float F = Distributions::FresnelExact(wi, wh, refr_index_i, refr_index_o);
 
+	//float beckman_shininess = 1.2f - (0.2f * sqrt(abs(dot(wi, n))));
+	
 	// Microfacet distribution
 	float D = Distributions::GGX_D(n, wh, shininess);
+	//float D = Distributions::Beckmann_D(n, wh, shininess * beckman_shininess);
 
 	// Shadowing-masking term
 	float G = Distributions::GGXSmith_G(wi, wo, wh, n, shininess);
+	//float G = Distributions::BeckmannSmith_G(wi, wo, wh, n, shininess * beckman_shininess);
 
 	// BRDF
 	float brdf = (F * D * G) / (4 * abs(dot(n, wo)) * abs(dot(n, wi)));
@@ -247,35 +255,30 @@ vec3 BTDF::f(const vec3& wi, const vec3& wo, const vec3& n)
 
 vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 {
+	
 	// Calculate wh
-	vec3 tangent = normalize(perpendicular(n));
-	vec3 bitangent = normalize(cross(tangent, n));
-	float phi = 2.0f * M_PI * randf();
-
-	float r = randf();
-	float cos_theta = sqrt((1.0f - r) / ((((shininess * shininess) - 1.0f) * r) + 1.0f));
-	float sin_theta = sqrt(max(0.0f, 1.0f - (cos_theta * cos_theta)));
-
-	vec3 wh = normalize(sin_theta * cos(phi) * tangent +
-		sin_theta * sin(phi) * bitangent +
-		cos_theta * n);
+	vec3 wh = Distributions::GGX_sample_wh(n, shininess);
+	
+	//float beckman_shininess = 1.2f - (0.2f * sqrt(abs(dot(-wo, n))));
+	//vec3 wh = Distributions::Beckmann_sample_wh(n, shininess * beckman_shininess);
 
 
 	// Fresnel
-	float F = Distributions::FresnelSchlick(wo, wh, R0);
+	//float F = Distributions::FresnelSchlick(-wo, wh, R0);
 
 	////Total internal reflection
-	float eta = refr_index_i / refr_index_o;
-	float cosX = dot(n, -wo);
-	float sinX = (eta * eta) * (1.0f - (cosX * cosX));
-	if (sinX > 1.0f) {
-		F = 1.0f;
-	}
+	//float eta = refr_index_i / refr_index_o;
+	//float cosX = dot(n, -wo);
+	//float sinX = (eta * eta) * (1.0f - (cosX * cosX));
+	//if (sinX > 1.0f) {
+	//	F = 1.0f;
+	//}
 	
-	///*float eta = refr_index_i / refr_index_o;
-	//float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);*/
+	float eta = refr_index_i / refr_index_o;
+	float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);
 
 	float D = Distributions::GGX_D(n, wh, shininess);
+	//float D = Distributions::Beckmann_D(n, wh, shininess * beckman_shininess);
 	float pwh = D * abs(dot(n, wh));
 
 	// Decide based on Fresnel
@@ -382,6 +385,90 @@ float Distributions::GGXSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, 
 	// Bidirectional G
 	float G = Gi * Go;
 	return G;
+}
+
+vec3 Distributions::GGX_sample_wh(const vec3& n, const float shininess) {
+	vec3 tangent = normalize(perpendicular(n));
+	vec3 bitangent = normalize(cross(tangent, n));
+	float phi = 2.0f * M_PI * randf();
+
+	float r = randf();
+	float cos_theta = sqrt((1.0f - r) / ((((shininess * shininess) - 1.0f) * r) + 1.0f));
+	float sin_theta = sqrt(max(0.0f, 1.0f - (cos_theta * cos_theta)));
+
+	vec3 wh = normalize(sin_theta * cos(phi) * tangent +
+		sin_theta * sin(phi) * bitangent +
+		cos_theta * n);
+
+	return wh;
+}
+
+
+float Distributions::Beckmann_D(const vec3& n, const vec3& wh, const float shininess) {
+	float cosNWH = dot(n, wh);
+
+	if (cosNWH > 0.0f) {
+		float tanNWH = (1 - (cosNWH * cosNWH)) / (cosNWH * cosNWH); // tan^2(n, wh)
+		float pwrTerm = -tanNWH / (shininess * shininess);
+		float denominator = M_PI * (shininess * shininess) * pow(cosNWH, 4.0f);
+		float D = exp(pwrTerm) / denominator;
+		return D;
+	}
+	else {
+		return 0.0f;
+	}
+}
+
+float Distributions::BeckmannSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess) {
+	float vwh = dot(v, wh);
+	float nv = dot(n, v);
+
+	if (vwh / nv > 0.0f) {
+		float tanNV = sqrt(1.0f - (nv * nv)) / nv;
+
+		if (tanNV == 0.0f)
+			return 0.0f;
+
+		float alfa = 1.0f / (shininess * tanNV);
+
+		if (alfa < 1.6f) {
+			float num = (3.535f * alfa) + (2.181f * alfa * alfa);
+			float den = 1.0f + (2.276f * alfa) + (2.577 * alfa * alfa);
+			float G1 = num / den;
+
+			return G1;
+		}
+		else {
+			return 1.0f;
+		}
+	}
+	else {
+		return 0.0f;
+	}
+}
+
+float Distributions::BeckmannSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess) {
+	float Gi = BeckmannSmith_G1(wi, wh, n, shininess);
+	float Go = BeckmannSmith_G1(wo, wh, n, shininess);
+
+	// Bidirectional G
+	float G = Gi * Go;
+	return G;
+}
+
+vec3 Distributions::Beckmann_sample_wh(const vec3& n, const float shininess) {
+	vec3 tangent = normalize(perpendicular(n));
+	vec3 bitangent = normalize(cross(tangent, n));
+	float phi = 2.0f * M_PI * randf();
+
+	float cos_theta = sqrt(1.0f / (1.0f - (shininess * shininess) * log(1 - randf())));
+	float sin_theta = sqrt(max(0.0f, 1.0f - (cos_theta * cos_theta)));
+
+	vec3 wh = normalize(sin_theta * cos(phi) * tangent +
+		sin_theta * sin(phi) * bitangent +
+		cos_theta * n);
+
+	return wh;
 }
 
 } // namespace pathtracer

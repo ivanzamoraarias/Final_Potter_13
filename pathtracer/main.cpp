@@ -149,7 +149,7 @@ void initialize()
 	///////////////////////////////////////////////////////////////////////////
 	// Initial path-tracer settings
 	///////////////////////////////////////////////////////////////////////////
-	pathtracer::settings.max_bounces = 8;
+	pathtracer::settings.max_bounces = 100;
 	pathtracer::settings.max_paths_per_pixel = 0; // 0 = Infinite
 #ifdef _DEBUG
 	pathtracer::settings.subsampling = 16;
@@ -209,7 +209,7 @@ void initialize()
 
 	//models.push_back(make_pair(terrainModel, scale(vec3(20.0f, 1.0f, 20.0f))));
 
-	ardillaModel = labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj");
+	/*ardillaModel = labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj");
 	mat4 cloudViewMatrix = lookAt(cameraPosition, cameraPosition + cameraDirection, worldUp);
 	
 	int cloudUpdates = 10;
@@ -223,7 +223,7 @@ void initialize()
 		mat4 sclateMatrix = scale(vec3(2 * randScale, 2 * randScale, 2 * randScale));
 		mat4 modelMatrix = translate(item) * sclateMatrix;
 		models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj"), modelMatrix));
-	}
+	}*/
 	
 	
 
