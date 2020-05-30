@@ -104,15 +104,10 @@ Intersection getIntersection(const Ray& r)
 	i.shading_normal = normalize(w * n0 + r.u * n1 + r.v * n2);
 	i.geometry_normal = -normalize(r.n);
 
-	if (i.material->m_color_texture.valid) {
-		vec2 t0 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 0];
-		vec2 t1 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 1];
-		vec2 t2 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 2];
-		i.textCoord = normalize(w * t0 + r.u * t1 + r.v * t2);
-	}
-	else {
-		i.textCoord = vec2(0.0f);
-	}
+	vec2 t0 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 0];
+	vec2 t1 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 1];
+	vec2 t2 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 2];
+	i.textCoord = normalize(w * t0 + r.u * t1 + r.v * t2);
 
 	i.position = r.o + r.tfar * r.d;
 	i.wo = normalize(-r.d);

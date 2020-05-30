@@ -181,6 +181,15 @@ void initialize()
 	pathtracer::disk_lights[1].radius = 10.0f;
 	pathtracer::disk_lights[1].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[1].position);
 
+
+	/////////////////////////////////////////////////////////////////////////
+	// Camera Settings
+	////////////////////////////////////////////////////////////////////////
+	pathtracer::cam_settings.focal_length = 1.0f;
+	pathtracer::cam_settings.focal_distance = 1.0f;
+	pathtracer::cam_settings.aperture = 0.0f;
+	pathtracer::cam_settings.exposure = 1.0f;
+
 	///////////////////////////////////////////////////////////////////////////
 	// Load environment map
 	///////////////////////////////////////////////////////////////////////////
@@ -198,10 +207,12 @@ void initialize()
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ardillaPilla.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ground_plane.obj"), rotate(90.0f, vec3(1.0f, 0.0f, 0.0f))));
-	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(0.f, 0.f, 0.f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(10.f, 0.f, -10.f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(15.f, 0.f, -15.f))));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(20.f, 0.f, -20.f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/Cornell.obj"), scale(vec3(2.0f, 2.0f, 2.0f))));
 	
 
@@ -551,6 +562,22 @@ void gui()
 			0.0f, 10000.0f);
 		ImGui::SliderFloat("Disk Light 2 radius", &pathtracer::disk_lights[1].radius,
 			0.0f, 100.0f);
+	}
+
+
+	if (ImGui::CollapsingHeader("Camera Settings", "camera_ch", true, true))
+	{
+		ImGui::SliderFloat("Focal Length", &pathtracer::cam_settings.focal_length,
+			0.5f, 3.0f);
+
+		ImGui::SliderFloat("Focal Distance", &pathtracer::cam_settings.focal_distance,
+			1.0f, 10.0f);
+
+		ImGui::SliderFloat("Aperture", &pathtracer::cam_settings.aperture,
+			0.0f, 0.1f);
+
+		ImGui::SliderFloat("Exposure", &pathtracer::cam_settings.exposure,
+			0.0f, 2.0f);
 	}
 
 	ImGui::End(); // Control Panel

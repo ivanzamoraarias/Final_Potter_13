@@ -68,6 +68,14 @@ extern struct DiskLight
 	vec3 normal;
 }disk_lights[];
 
+extern struct CameraSettings
+{
+	float focal_length;
+	float focal_distance;
+	float aperture;
+	float exposure;
+} cam_settings;
+
 ///////////////////////////////////////////////////////////////////////////
 // Restart rendering of image
 ///////////////////////////////////////////////////////////////////////////

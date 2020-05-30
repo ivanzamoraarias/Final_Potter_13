@@ -189,8 +189,8 @@ vec3 BTDF::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 	wh = normalize(wh);
 
 	// Fresnel
-	//float F = Distributions::FresnelSchlick(wi, wh, R0);
-	float F = Distributions::FresnelExact(wi, wh, eta_i, eta_o);
+	float F = Distributions::FresnelSchlick(wi, wh, R0);
+	//float F = Distributions::FresnelExact(wi, wh, eta_i, eta_o);
 
 	//float beckman_shininess = 1.2f - (0.2f * sqrt(abs(dot(wi, n))));
 	
@@ -226,8 +226,8 @@ vec3 BTDF::reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n)
 	//if (dot(wi, n) <= 0.f) return vec3(0.0f);
 
 	// Fresnel
-	//float F = Distributions::FresnelSchlick(wi, wh, R0);
-	float F = Distributions::FresnelExact(wi, wh, refr_index_i, refr_index_o);
+	float F = Distributions::FresnelSchlick(wi, wh, R0);
+	//float F = Distributions::FresnelExact(wi, wh, refr_index_i, refr_index_o);
 
 	//float beckman_shininess = 1.2f - (0.2f * sqrt(abs(dot(wi, n))));
 	
@@ -264,18 +264,18 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 
 
 	// Fresnel
-	//float F = Distributions::FresnelSchlick(-wo, wh, R0);
+	float F = Distributions::FresnelSchlick(-wo, wh, R0);
 
-	////Total internal reflection
-	//float eta = refr_index_i / refr_index_o;
-	//float cosX = dot(n, -wo);
-	//float sinX = (eta * eta) * (1.0f - (cosX * cosX));
-	//if (sinX > 1.0f) {
-	//	F = 1.0f;
-	//}
-	
+	//Total internal reflection
 	float eta = refr_index_i / refr_index_o;
-	float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);
+	float cosX = dot(n, -wo);
+	float sinX = (eta * eta) * (1.0f - (cosX * cosX));
+	if (sinX > 1.0f) {
+		F = 1.0f;
+	}
+	
+	/*float eta = refr_index_i / refr_index_o;
+	float F = Distributions::FresnelExact(wo, wh, refr_index_i, refr_index_o);*/
 
 	float D = Distributions::GGX_D(n, wh, shininess);
 	//float D = Distributions::Beckmann_D(n, wh, shininess * beckman_shininess);
@@ -324,6 +324,16 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 
 	}
 
+}
+
+vec3 BTDF_Metal::refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n)
+{
+	return vec3(0.0f);
+}
+
+vec3 BTDF_Metal::reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n)
+{
+	return BTDF::reflection_brdf(wi, wo, n) * color;
 }
 
 

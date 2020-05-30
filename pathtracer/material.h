@@ -88,11 +88,9 @@ public:
 	float R0;
 	float refr_index_i;
 	float refr_index_o;
-	BRDF* refraction_layer;
-	float transparency;
 	bool isRefracted;
-	BTDF(float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f, float _transparency = 1.0f, BRDF* _refraction_layer = NULL)
-		: shininess(_shininess), R0(_R0), refr_index_i(_refr_index_i), refr_index_o(_refr_index_o), transparency(_transparency), refraction_layer(_refraction_layer)
+	BTDF(float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f)
+		: shininess(_shininess), R0(_R0), refr_index_i(_refr_index_i), refr_index_o(_refr_index_o)
 	{
 		isRefracted = false;
 	}
@@ -116,6 +114,19 @@ public:
 	static float BeckmannSmith_G1(const vec3& v, const vec3& wh, const vec3& n, const float shininess);
 	static float BeckmannSmith_G(const vec3& wi, const vec3& wo, const vec3& wh, const vec3& n, const float shininess);
 	static vec3 Beckmann_sample_wh(const vec3& n, const float shininess);
+};
+
+
+class BTDF_Metal : public BTDF
+{
+public:
+	vec3 color;
+	BTDF_Metal(vec3 c, float _shininess, float _R0, float _refr_index_i = 1.0f, float _refr_index_o = 1.0f, float _transparency = 1.0f) 
+		: color(c), BTDF(_shininess, _R0, _refr_index_i, _refr_index_o)
+	{
+	}
+	virtual vec3 refraction_brdf(const vec3& wi, const vec3& wo, const vec3& n);
+	virtual vec3 reflection_brdf(const vec3& wi, const vec3& wo, const vec3& n);
 };
 
 } // namespace pathtracer

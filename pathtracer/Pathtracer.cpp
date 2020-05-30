@@ -21,8 +21,7 @@ namespace pathtracer
 	Image rendered_image;
 	PointLight point_light;
 	DiskLight disk_lights[2];
-
-	float current_refr_index;
+	CameraSettings cam_settings;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Restart rendering of image
@@ -67,14 +66,19 @@ namespace pathtracer
 	// direction (-r.d), through path tracing.
 	///////////////////////////////////////////////////////////////////////////
 
-	vec3 textureSample(labhelper::Texture t, float u, float v) {
+	vec4 textureSample(labhelper::Texture t, float u, float v) {
 		//int x = int(u);
 		//int y = int(v);
 
-		int x = int(u * t.width) % t.width;
-		int y = int(v * t.height) % t.height;
+		int x = int(floor(u * t.width));
+		int y = int(floor(v * t.height));
 
-		vec3 c = vec3(t.data[4 * (y * t.width + x) + 0] / 255.0, t.data[4 * (y * t.width + x) + 1] / 255.0, t.data[4 * (y * t.width + x) + 2] / 255.0);
+		vec4 c = vec4(
+			t.data[4 * (y * t.width + x) + 0] / 255.0f, 
+			t.data[4 * (y * t.width + x) + 1] / 255.0f, 
+			t.data[4 * (y * t.width + x) + 2] / 255.0f,
+			t.data[4 * (y * t.width + x) + 3] / 255.0f
+		);
 		return c;
 	}
 
@@ -114,12 +118,11 @@ namespace pathtracer
 
 			Diffuse diffuse(diffuse_color);
 			//BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, &diffuse);
-			BTDF transparent(clamp(hit.material->m_shininess, 0.003f, 1.0f), hit.material->m_fresnel, ni, no, hit.material->m_transparency, &diffuse);
-			BlinnPhongMetal metal(hit.material->m_color, hit.material->m_shininess,
-				hit.material->m_fresnel);
+			BTDF transparent(clamp(hit.material->m_shininess, 0.003f, 1.0f), hit.material->m_fresnel, ni, no);
+			BTDF_Metal metal(hit.material->m_color, clamp(hit.material->m_shininess, 0.003f, 1.0f), hit.material->m_fresnel, ni, no);
 			LinearBlend metal_blend(hit.material->m_metalness, &metal, &transparent);
 			LinearBlend reflectivity_blend(hit.material->m_reflectivity, &metal_blend, &diffuse);
-			BRDF& mat = transparent;
+			BRDF& mat = reflectivity_blend;
 
 			//LinearBlend transparency_blend(hit.material->m_transparency, &reflectivity_blend, &transparent);
 			//BRDF& mat = transparency_blend;
@@ -230,6 +233,7 @@ namespace pathtracer
 			return;
 		}
 		vec3 camera_pos = vec3(glm::inverse(V) * vec4(0.0f, 0.0f, 0.0f, 1.0f));
+		vec3 camera_forward = -vec3(V[0][2], V[1][2], V[2][2]);
 		// Trace one path per pixel (the omp parallel stuf magically distributes the
 		// pathtracing on all cores of your CPU).
 		int num_rays = 0;
@@ -251,11 +255,43 @@ namespace pathtracer
 				vec4 viewCoord = vec4(screenCoord.x * 2.0f - 1.0f + ((randf() * 2.0f - 1.0f) / 400.0f), screenCoord.y * 2.0f - 1.0f + ((randf() * 2.0f - 1.0f) / 400.0f), 1.0f, 1.0f);
 				vec3 p = homogenize(inverse(P * V) * viewCoord);
 				primaryRay.d = normalize(p - camera_pos);
+
+				// Depth of Field
+				vec4 sensor_plane(camera_forward, 0.0f);
+				sensor_plane.w = -dot(camera_forward, (camera_pos - camera_forward));
+
+				float t = -(dot(camera_pos, vec3(sensor_plane)) + sensor_plane.w) / dot(primaryRay.d, vec3(sensor_plane));
+				vec3 sensor_pos = camera_pos + primaryRay.d * t;
+
+				// convert sensor pos to camera space
+				vec3 cameraSpaceSensorPos = V * vec4(sensor_pos, 1.0f);
+
+				cameraSpaceSensorPos.z *= cam_settings.focal_length;
+
+				// back to world space
+				sensor_pos = glm::inverse(V) * vec4(cameraSpaceSensorPos, 1.0f);
+
+
+				// Point on aperture
+				float angle = randf() * 2.0f * M_PI;
+				float radius = sqrt(randf());
+				vec2 offset(cos(angle), sin(angle));
+
+				offset = offset * radius * cam_settings.aperture;
+				
+				vec3 cameraRight = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f) * V;
+				vec3 cameraUp = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f) * V;
+
+				vec3 aperturePos = camera_pos + (cameraRight * offset.x) + (cameraUp * offset.y);
+
+				vec3 focal_point = primaryRay.o + (cam_settings.focal_distance * primaryRay.d);
+
+				primaryRay.o = aperturePos;
+				primaryRay.d = normalize(focal_point - aperturePos);
+
 				// Intersect ray with scene
 				if (intersect(primaryRay))
 				{
-					current_refr_index = 1.0f;
-
 					// If it hit something, evaluate the radiance from that point
 
 					vec3 radiance = Li(primaryRay);
@@ -272,6 +308,11 @@ namespace pathtracer
 					// Otherwise evaluate environment
 					color = vec4(Lenvironment(primaryRay.d), 1.0f);
 				}
+
+				//exposure
+				color *= cam_settings.exposure;
+
+
 				// Accumulate the obtained radiance to the pixels color
 				float n = float(rendered_image.number_of_samples);
 				rendered_image.data[y * rendered_image.width + x] =
