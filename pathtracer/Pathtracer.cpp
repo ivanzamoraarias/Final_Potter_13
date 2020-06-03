@@ -8,6 +8,7 @@
 #include "sampling.h"
 #include "Model.h"
 
+
 using namespace std;
 using namespace glm;
 
@@ -20,7 +21,8 @@ namespace pathtracer
 	Environment environment;
 	Image rendered_image;
 	PointLight point_light;
-	DiskLight disk_lights[2];
+	DiskLight disk_light[1];
+	SphereLight sphere_light[1];
 	CameraSettings cam_settings;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -65,23 +67,6 @@ namespace pathtracer
 	// Calculate the radiance going from one point (r.hitPosition()) in one
 	// direction (-r.d), through path tracing.
 	///////////////////////////////////////////////////////////////////////////
-
-	vec4 textureSample(labhelper::Texture t, float u, float v) {
-		//int x = int(u);
-		//int y = int(v);
-
-		int x = int(floor(u * t.width));
-		int y = int(floor(v * t.height));
-
-		vec4 c = vec4(
-			t.data[4 * (y * t.width + x) + 0] / 255.0f, 
-			t.data[4 * (y * t.width + x) + 1] / 255.0f, 
-			t.data[4 * (y * t.width + x) + 2] / 255.0f,
-			t.data[4 * (y * t.width + x) + 3] / 255.0f
-		);
-		return c;
-	}
-
 	vec3 Li(Ray& primary_ray)
 	{
 		vec3 L = vec3(0.0f);
@@ -93,20 +78,36 @@ namespace pathtracer
 			// Get Intersection
 			Intersection hit = getIntersection(current_ray);
 
-			vec3 diffuse_color;
+			vec3 diffuse_color = vec3(hit.material->m_color);
 			if (hit.material->m_color_texture.valid) {
-				diffuse_color = textureSample(hit.material->m_color_texture, hit.textCoord.x, hit.textCoord.y);
+				diffuse_color = texSampleRGBA(hit.material->m_color_texture, hit.textCoord.x, hit.textCoord.y);
 				//diffuse_color = vec4(hit.material->m_color, hit.material->m_transparency);
 			}
-			else {
-				diffuse_color = vec3(hit.material->m_color);
+
+			float roughness = clamp(hit.material->m_shininess, 0.003f, 1.0f);
+			if (hit.material->m_shininess_texture.valid)
+			{
+				roughness = texSampleR(hit.material->m_shininess_texture, hit.textCoord.x, hit.textCoord.y);
+				roughness = clamp(roughness, 0.003f, 0.2f);
+			}
+
+			vec3 normal = hit.shading_normal;
+			if (hit.material->m_bump_texture.valid)
+			{
+				vec3 t = hit.tangent;
+				vec3 b = normalize(cross(normal, t));
+				vec3 n = (texSampleRGB(hit.material->m_bump_texture, hit.textCoord.x, hit.textCoord.y));
+				n = normalize((n * 2.0f) - 1.0f);
+				mat3 tbn(t, b, normal);
+				
+				normal = normalize(tbn * n);
 			}
 
 			// check if a ray would change (enter or exit) medium
 			float ni, no;
 			bool isEnteringMaterial = false;
-			vec3 normal = hit.shading_normal;
-			if (dot(current_ray.d, hit.shading_normal) < 0.0f) {
+			
+			if (dot(current_ray.d, normal) < 0.0f) {
 				ni = 1.0f;
 				no = 1.5f;
 				isEnteringMaterial = true;
@@ -117,48 +118,45 @@ namespace pathtracer
 			}
 
 			Diffuse diffuse(diffuse_color);
-			//BlinnPhong dielectric(hit.material->m_shininess, hit.material->m_fresnel, &diffuse);
-			BTDF transparent(clamp(hit.material->m_shininess, 0.003f, 1.0f), hit.material->m_fresnel, ni, no);
-			BTDF_Metal metal(hit.material->m_color, clamp(hit.material->m_shininess, 0.003f, 1.0f), hit.material->m_fresnel, ni, no);
+			BTDF transparent(roughness, hit.material->m_fresnel, ni, no);
+			BTDF_Metal metal(diffuse_color, roughness, hit.material->m_fresnel, ni, no);
 			LinearBlend metal_blend(hit.material->m_metalness, &metal, &transparent);
 			LinearBlend reflectivity_blend(hit.material->m_reflectivity, &metal_blend, &diffuse);
 			BRDF& mat = reflectivity_blend;
 
-			//LinearBlend transparency_blend(hit.material->m_transparency, &reflectivity_blend, &transparent);
-			//BRDF& mat = transparency_blend;
-
 
 			// Sample light point in disk
 
-			DiskLight disk_light;
 
-			if (randf() < 0.5f) {
+			/*if (randf() < 0.5f) {
 				disk_light = disk_lights[0];
 			}
 			else {
 				disk_light = disk_lights[1];
-			}
+			}*/
+			
+			DiskLight light = disk_light[0];
+			std::pair<vec3, vec3> light_sample = light.sample();
 
-			float diskSampleX;
-			float diskSampleY;
+			/*SphereLight light = sphere_light[0];
+			std::pair<vec3, vec3> light_sample = light.sample(hit.position);*/
 
-			concentricSampleDisk(&diskSampleX, &diskSampleY);
-
-			vec3 diskSample = vec3(diskSampleX * disk_light.radius, 0.0f, diskSampleY * disk_light.radius) + disk_light.position;
+			vec3 shapeSample = light_sample.first;
+			vec3 lightColor = light_sample.second;
 
 			// Check if in shadow
 			Ray shadow_ray;
 
 			shadow_ray.o = hit.position + (EPSILON * hit.shading_normal);
-			shadow_ray.d = normalize(diskSample - hit.position);
+			shadow_ray.d = normalize(shapeSample - hit.position);
 
 			if (!occluded(shadow_ray)) {
 				// Direct illumination
-				float diskArea = M_PI * (disk_light.radius * disk_light.radius);
-				const float distance_to_light = length(diskSample - hit.position);
+				float area = M_PI * (light.radius * light.radius);
+				const float distance_to_light = length(shapeSample - hit.position);
 				const float falloff_factor = 1.0f / (distance_to_light * distance_to_light);
-				vec3 wi = normalize(diskSample - hit.position);
-				vec3 Li = 2 * disk_light.intensity_multiplier * disk_light.color * falloff_factor * dot(-wi, disk_light.normal) * diskArea;
+				vec3 wi = normalize(shapeSample - hit.position);
+				vec3 Li = 2 * light.intensity_multiplier * lightColor * falloff_factor * dot(-wi, light.normal) * area;
 				Li /= 500.0f;
 
 				L += path_throughput * (mat.f(wi, hit.wo, normal) * Li * std::max(0.0f, dot(wi, normal)));
@@ -196,10 +194,10 @@ namespace pathtracer
 			Ray nextRayInPath;
 
 			if (isEnteringMaterial && transparent.isRefracted) {
-				nextRayInPath.o = hit.position - (EPSILON * hit.geometry_normal);
+				nextRayInPath.o = hit.position - (EPSILON * normal);
 			}
 			else {
-				nextRayInPath.o = hit.position + (EPSILON * hit.geometry_normal);
+				nextRayInPath.o = hit.position + (EPSILON * normal);
 			}
 
 			nextRayInPath.d = rand_wi;

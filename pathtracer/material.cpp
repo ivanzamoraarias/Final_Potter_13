@@ -281,6 +281,8 @@ vec3 BTDF::sample_wi(vec3& wi, const vec3& wo, const vec3& n, float& p)
 	//float D = Distributions::Beckmann_D(n, wh, shininess * beckman_shininess);
 	float pwh = D * abs(dot(n, wh));
 
+
+
 	// Decide based on Fresnel
 	if (randf() <= F) {
 

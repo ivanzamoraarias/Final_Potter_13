@@ -4,6 +4,8 @@
 #include <Model.h>
 #include <omp.h>
 #include "HDRImage.h"
+#include "Light.h"
+
 
 #ifdef M_PI
 #undef M_PI
@@ -58,15 +60,15 @@ extern struct PointLight
 	vec3 position;
 } point_light;
 
-
-extern struct DiskLight
-{
-	float intensity_multiplier;
-	vec3 color;
-	vec3 position;
-	float radius;
-	vec3 normal;
-}disk_lights[];
+//extern struct DiskLight
+//{
+//	float intensity_multiplier;
+//	vec3 color;
+//	vec3 position;
+//	float radius;
+//	vec3 normal;
+//	labhelper::Texture texture;
+//}disk_lights[];
 
 extern struct CameraSettings
 {
@@ -75,6 +77,10 @@ extern struct CameraSettings
 	float aperture;
 	float exposure;
 } cam_settings;
+
+// Global array of lights
+DiskLight disk_light[];
+SphereLight sphere_light[];
 
 ///////////////////////////////////////////////////////////////////////////
 // Restart rendering of image

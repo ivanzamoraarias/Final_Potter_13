@@ -169,18 +169,19 @@ void initialize()
 	
 
 	// Disk Light
-	pathtracer::disk_lights[0].intensity_multiplier = 1000.0f;
-	pathtracer::disk_lights[0].color = vec3(1.f, 1.f, 1.f);
-	pathtracer::disk_lights[0].position = vec3(0.0f, 5.0f, 0.0f);
-	pathtracer::disk_lights[0].radius = 3.0f;
-	pathtracer::disk_lights[0].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[0].position);
+	pathtracer::disk_light[0].intensity_multiplier = 1000.0f;
+	pathtracer::disk_light[0].color = vec3(1.f, 1.f, 1.f);
+	pathtracer::disk_light[0].position = vec3(0.0f, 5.0f, 0.0f);
+	pathtracer::disk_light[0].radius = 3.0f;
+	pathtracer::disk_light[0].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_light[0].position);
+	//pathtracer::disk_light[0].texture.load("../scenes/", "fez.jpg", 4);
 
-	pathtracer::disk_lights[1].intensity_multiplier = 0.0f;
-	pathtracer::disk_lights[1].color = vec3(1.f, 1.f, 1.f);
-	pathtracer::disk_lights[1].position = vec3(-30.0f, 30.0f, 0.0f);
-	pathtracer::disk_lights[1].radius = 10.0f;
-	pathtracer::disk_lights[1].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::disk_lights[1].position);
-
+	pathtracer::sphere_light[0].intensity_multiplier = 1000.0f;
+	pathtracer::sphere_light[0].color = vec3(1.f, 0.f, 0.f);
+	pathtracer::sphere_light[0].position = vec3(0.0f, 5.0f, 0.0f);
+	pathtracer::sphere_light[0].radius = 3.0f;
+	pathtracer::sphere_light[0].normal = normalize(vec3(0.0f, 0.0f, 0.0f) - pathtracer::sphere_light[0].position);
+	pathtracer::sphere_light[0].texture.load("../scenes/", "fez.jpg", 4);
 
 	/////////////////////////////////////////////////////////////////////////
 	// Camera Settings
@@ -202,23 +203,27 @@ void initialize()
 	
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ffxiii/FF13_360_CHARACTER_Claire_Farron_Default.obj"), scale(vec3(15.0f, 15.0f, 15.0f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ffxiii/Lightning.obj"), translate(vec3(15.0f, 0.0f, 0.0f)) * scale(vec3(15.0f, 15.0f, 15.0f))));
-	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj"), translate(vec3(15.0f, 0.0f, 0.0f)) * scale(vec3(1.0f, 1.0f, 1.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/harry_potter/harry/skharrymesh.obj"), translate(vec3(15.0f, 0.0f, 0.0f)) * scale(vec3(0.2f, 0.2f, 0.2f))));
 
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/NewShip.obj"), translate(vec3(0.0f, 10.0f, 0.0f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/landingpad2.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/tetra_balls.obj"), translate(vec3(10.f, 0.f, 0.f))));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/BigSphere.obj"), mat4(1.0f)));
+	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/Glass_sphere/Glass_sphere.obj"), mat4(1.0f)));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/wheatley.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ardillaPilla.obj"), mat4(1.0f)));
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/ground_plane.obj"), rotate(90.0f, vec3(1.0f, 0.0f, 0.0f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(10.f, 0.f, -10.f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(15.f, 0.f, -15.f))));
-	models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(20.f, 0.f, -20.f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), scale(vec3(2.0f, 2.0f, 2.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(0.0f, 10.0f, 0.0f)) * scale(vec3(2.0f, 2.0f, 2.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(0.0f, 5.0f, 5.0f)) * scale(vec3(2.0f, 2.0f, 2.0f))));
+	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/cube.obj"), translate(vec3(0.0f, 5.0f, -5.0f)) * scale(vec3(2.0f, 2.0f, 2.0f))));
+	
 	//models.push_back(make_pair(labhelper::loadModelFromOBJ("../scenes/Cornell.obj"), scale(vec3(2.0f, 2.0f, 2.0f))));
 	
 
 	//terrainModel = createTerrainModel();
 
-	//models.push_back(make_pair(terrainModel, scale(vec3(20.0f, 1.0f, 20.0f))));
+	//models.push_back(make_pair(terrainModel, translate(vec3(-1000.0f, -1500.0f, 5000.0f)) * scale(vec3(20.0f, 1.0f, 20.0f))));
 
 	/*ardillaModel = labhelper::loadModelFromOBJ("../scenes/cloudOnMaya.obj");
 	mat4 cloudViewMatrix = lookAt(cameraPosition, cameraPosition + cameraDirection, worldUp);
@@ -551,7 +556,7 @@ void gui()
 						   */
 						   
 
-		ImGui::ColorEdit3("Disk Light 1 color", &pathtracer::disk_lights[0].color.x);
+		/*ImGui::ColorEdit3("Disk Light 1 color", &pathtracer::disk_lights[0].color.x);
 		ImGui::SliderFloat("Disk Light 1 intensity multiplier", &pathtracer::disk_lights[0].intensity_multiplier,
 			0.0f, 10000.0f);
 		ImGui::SliderFloat("Disk Light 1 radius", &pathtracer::disk_lights[0].radius,
@@ -561,7 +566,7 @@ void gui()
 		ImGui::SliderFloat("Disk Light 2 intensity multiplier", &pathtracer::disk_lights[1].intensity_multiplier,
 			0.0f, 10000.0f);
 		ImGui::SliderFloat("Disk Light 2 radius", &pathtracer::disk_lights[1].radius,
-			0.0f, 100.0f);
+			0.0f, 100.0f);*/
 	}
 
 

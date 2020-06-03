@@ -34,6 +34,7 @@ struct Material
 	float m_emission;
 	float m_transparency;
 	Texture m_color_texture;
+	Texture m_bump_texture;
 	Texture m_reflectivity_texture;
 	Texture m_shininess_texture;
 	Texture m_metalness_texture;
@@ -66,10 +67,12 @@ public:
 	std::vector<glm::vec3> m_positions;
 	std::vector<glm::vec3> m_normals;
 	std::vector<glm::vec2> m_texture_coordinates;
+	std::vector<glm::vec3> m_tangents;
 	// Buffers on GPU
 	uint32_t m_positions_bo;
 	uint32_t m_normals_bo;
 	uint32_t m_texture_coordinates_bo;
+	uint32_t m_tangents_bo;
 	// Vertex Array Object
 	uint32_t m_vaob;
 };

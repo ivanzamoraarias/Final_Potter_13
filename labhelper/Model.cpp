@@ -29,7 +29,7 @@ bool Texture::load(const std::string& _directory, const std::string& _filename, 
 	GLenum format, internal_format;
 	if(_components == 1)
 	{
-		format = GL_R;
+		format = GL_RED;
 		internal_format = GL_R8;
 	}
 	else if(_components == 3)
@@ -80,6 +80,7 @@ Model::~Model()
 	glDeleteBuffers(1, &m_positions_bo);
 	glDeleteBuffers(1, &m_normals_bo);
 	glDeleteBuffers(1, &m_texture_coordinates_bo);
+	glDeleteBuffers(1, &m_tangents_bo);
 }
 
 Model* loadModelFromOBJ(std::string path)
@@ -163,6 +164,7 @@ Model* loadModelFromOBJ(std::string path)
 		material.m_shininess = m.roughness;
 		if(m.roughness_texname != "")
 		{
+			std::string a = m.roughness_texname;
 			material.m_shininess_texture.load(directory, m.roughness_texname, 1);
 		}
 		material.m_emission = m.emission[0];
@@ -171,6 +173,12 @@ Model* loadModelFromOBJ(std::string path)
 			material.m_emission_texture.load(directory, m.emissive_texname, 4);
 		}
 		material.m_transparency = m.transmittance[0];
+
+		//bump map
+		if (m.bump_texname != "")
+		{
+			material.m_bump_texture.load(directory, m.bump_texname, 3);
+		}
 		model->m_materials.push_back(material);
 	}
 
@@ -187,6 +195,7 @@ Model* loadModelFromOBJ(std::string path)
 	model->m_positions.resize(number_of_vertices);
 	model->m_normals.resize(number_of_vertices);
 	model->m_texture_coordinates.resize(number_of_vertices);
+	model->m_tangents.resize(number_of_vertices);
 
 	///////////////////////////////////////////////////////////////////////
 	// For each vertex _position_ auto generate a normal that will be used
@@ -304,6 +313,32 @@ Model* loadModelFromOBJ(std::string path)
 					vertices_so_far += 3;
 				}
 			}
+
+			// generate tangents
+			for (int i = 0; i < number_of_vertices; i += 3)
+			{
+				glm::vec3 v0 = model->m_positions[i + 0];
+				glm::vec3 v1 = model->m_positions[i + 1];
+				glm::vec3 v2 = model->m_positions[i + 2];
+
+				glm::vec2 uv0 = model->m_texture_coordinates[i + 0];
+				glm::vec2 uv1 = model->m_texture_coordinates[i + 1];
+				glm::vec2 uv2 = model->m_texture_coordinates[i + 2];
+
+				glm::vec3 deltaPos1 = v1 - v0;
+				glm::vec3 deltaPos2 = v2 - v0;
+
+				glm::vec2 deltaUV1 = uv1 - uv0;
+				glm::vec2 deltaUV2 = uv2 - uv0;
+
+				float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+				glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+				model->m_tangents[i + 0] = tangent;
+				model->m_tangents[i + 1] = tangent;
+				model->m_tangents[i + 2] = tangent;
+			}
+
 			///////////////////////////////////////////////////////////////
 			// Finalize and push this mesh to the list
 			///////////////////////////////////////////////////////////////
@@ -340,6 +375,12 @@ Model* loadModelFromOBJ(std::string path)
 	             &model->m_texture_coordinates[0].x, GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, false, 0, 0);
 	glEnableVertexAttribArray(2);
+	glGenBuffers(1, &model->m_tangents_bo);
+	glBindBuffer(GL_ARRAY_BUFFER, model->m_tangents_bo);
+	glBufferData(GL_ARRAY_BUFFER, model->m_tangents.size() * sizeof(glm::vec3), &model->m_tangents[0].x,
+		GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+	glEnableVertexAttribArray(3);
 
 	std::cout << "done.\n";
 	return model;
@@ -407,6 +448,8 @@ void saveModelToOBJ(Model* model, std::string path)
 			mat_file << "map_Pr " << mat.m_shininess_texture.filename << "\n";
 		if(mat.m_emission_texture.valid)
 			mat_file << "map_Ke " << mat.m_emission_texture.filename << "\n";
+		if (mat.m_bump_texture.valid)
+			mat_file << "map_bump " << mat.m_bump_texture.filename << "\n";
 	}
 	mat_file.close();
 
@@ -480,6 +523,7 @@ void render(const Model* model, const bool submitMaterials)
 			bool has_fresnel_texture = material.m_fresnel_texture.valid;
 			bool has_shininess_texture = material.m_shininess_texture.valid;
 			bool has_emission_texture = material.m_emission_texture.valid;
+			bool has_bump_texture = material.m_bump_texture.valid;
 			if(has_color_texture)
 				glBindTextures(0, 1, &material.m_color_texture.gl_id);
 			if(has_reflectivity_texture)
@@ -492,6 +536,8 @@ void render(const Model* model, const bool submitMaterials)
 				glBindTextures(4, 1, &material.m_shininess_texture.gl_id);
 			if(has_emission_texture)
 				glBindTextures(5, 1, &material.m_emission_texture.gl_id);
+			if(has_bump_texture)
+				glBindTextures(6, 1, &material.m_bump_texture.gl_id);
 			GLint current_program = 0;
 			glGetIntegerv(GL_CURRENT_PROGRAM, &current_program);
 			glUniform1i(glGetUniformLocation(current_program, "has_color_texture"), has_color_texture);
@@ -504,6 +550,7 @@ void render(const Model* model, const bool submitMaterials)
 			glUniform1i(glGetUniformLocation(current_program, "has_shininess_texture"), has_shininess_texture);
 			glUniform1i(glGetUniformLocation(current_program, "has_emission_texture"),
 			            has_emission_texture ? 1 : 0);
+			glUniform1i(glGetUniformLocation(current_program, "has_bump_texture"), has_bump_texture);
 			glUniform3fv(glGetUniformLocation(current_program, "material_color"), 1, &material.m_color.x);
 			glUniform3fv(glGetUniformLocation(current_program, "material_diffuse_color"), 1,
 			             &material.m_color.x); //FIXME: Compatibility with old shading model of lab3.

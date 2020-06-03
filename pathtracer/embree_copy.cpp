@@ -107,7 +107,12 @@ Intersection getIntersection(const Ray& r)
 	vec2 t0 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 0];
 	vec2 t1 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 1];
 	vec2 t2 = model->m_texture_coordinates[((mesh->m_start_index / 3) + r.primID) * 3 + 2];
-	i.textCoord = normalize(w * t0 + r.u * t1 + r.v * t2);
+	i.textCoord = (w * t0 + r.u * t1 + r.v * t2);
+
+	vec3 tan0 = model->m_tangents[((mesh->m_start_index / 3) + r.primID) * 3 + 0];
+	vec3 tan1 = model->m_tangents[((mesh->m_start_index / 3) + r.primID) * 3 + 1];
+	vec3 tan2 = model->m_tangents[((mesh->m_start_index / 3) + r.primID) * 3 + 2];
+	i.tangent = normalize(w * tan0 + r.u * tan1 + r.v * tan2);
 
 	i.position = r.o + r.tfar * r.d;
 	i.wo = normalize(-r.d);

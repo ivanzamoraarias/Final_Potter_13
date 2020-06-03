@@ -60,6 +60,7 @@ struct Intersection
 	glm::vec3 geometry_normal;
 	glm::vec3 shading_normal;
 	glm::vec2 textCoord;
+	glm::vec3 tangent;
 	glm::vec3 wo;
 	const labhelper::Material* material;
 };

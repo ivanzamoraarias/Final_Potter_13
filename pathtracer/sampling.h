@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "Model.h"
 
 namespace pathtracer
 {
@@ -12,6 +13,14 @@ float randf();
 ///////////////////////////////////////////////////////////////////////////
 void concentricSampleDisk(float* dx, float* dy);
 ///////////////////////////////////////////////////////////////////////////
+// Generate uniform points on a sphere
+///////////////////////////////////////////////////////////////////////////
+void uniformSphere(float* dx, float* dy, float* dz);
+///////////////////////////////////////////////////////////////////////////
+// Generate uniform points on a sphere inside subtended cone
+///////////////////////////////////////////////////////////////////////////
+void uniformSphereCone(glm::vec3* sample, glm::vec3 coordSysX, glm::vec3 coordSysY, glm::vec3 coordSysZ, float distance);
+///////////////////////////////////////////////////////////////////////////
 // Generate points with a cosine distribution on the hemisphere
 ///////////////////////////////////////////////////////////////////////////
 glm::vec3 cosineSampleHemisphere();
@@ -23,4 +32,10 @@ glm::vec3 perpendicular(const glm::vec3& v);
 // Check if wi and wo are on the same side of the plane defined by n
 ///////////////////////////////////////////////////////////////////////////
 bool sameHemisphere(const glm::vec3& wi, const glm::vec3& wo, const glm::vec3& n);
+// Sample color texture
+glm::vec4 texSampleRGBA(labhelper::Texture t, float u, float v);
+// Sample color texture
+glm::vec3 texSampleRGB(labhelper::Texture t, float u, float v);
+// Sample maps (roughness, metallicness, etc.)
+float texSampleR(labhelper::Texture t, float u, float v);
 } // namespace pathtracer
